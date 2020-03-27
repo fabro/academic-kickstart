@@ -90,7 +90,7 @@ address = {street = "Carretera Antigua a Coatepec 351", city = "Xalapa", region 
 
 # Geographic coordinates
 # To get your coordinates, right-click on Google Maps and choose "What's here?". The coords will show up at the bottom.
-coordinates = {latitude = "37.4275", longitude = "-122.1697"}
+coordinates = {latitude = "19.5123978", longitude = "-96.9454221"}
 
 # Directions for visitors to locate you.
 directions = "Edificio C, Tercer Piso"
@@ -105,7 +105,7 @@ appointment_url = ""
 # Contact links
 #   Set to `[]` to disable, or comment out unwanted lines with a hash `#`.
 contact_links = [
-  {icon = "twitter", icon_pack = "fab", name = "DM Me", link = "https://twitter.com/maevolabMX"},
+  {icon = "twitter", icon_pack = "fab", name = "Follow us", link = "https://twitter.com/maevolabMX"},
   #{icon = "facebook", icon_pack = "fab", name = "FB", link = ""},
   #{icon = "keybase", icon_pack = "fab", name = "Chat on Keybase", link = "https://keybase.io/"},
   #{icon = "comments", icon_pack = "fas", name = "Discuss on Forum", link = "https://discourse.gohugo.io"},
