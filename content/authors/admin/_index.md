@@ -1,6 +1,6 @@
 ---
 # Display name
-name: Nelson Bighetti
+name: Fabricio Villalobos
 
 # Username (this should match the folder name)
 authors:
@@ -10,32 +10,30 @@ authors:
 superuser: true
 
 # Role/position
-role: Professor of Artificial Intelligence
+role: Investigador Titular A, SNI II
 
 # Organizations/Affiliations
 organizations:
-- name: Stanford University
+- name: Instituto de Ecología, A.C. 
   url: ""
 
 # Short bio (displayed in user profile at end of posts)
-bio: My research interests include distributed robotics, mobile computing and programmable matter.
+bio: My research interests include biodiversity patterns in space and time.
 
 interests:
-- Artificial Intelligence
-- Computational Linguistics
-- Information Retrieval
+- Macroecology
+- Biogeography
+- Spatial statistics
+- Phylogenetic Comparative Methods
 
 education:
   courses:
-  - course: PhD in Artificial Intelligence
-    institution: Stanford University
-    year: 2012
-  - course: MEng in Artificial Intelligence
-    institution: Massachusetts Institute of Technology
-    year: 2009
-  - course: BSc in Artificial Intelligence
-    institution: Massachusetts Institute of Technology
-    year: 2008
+  - course: PhD in Biological Sciences
+    institution: National Autonomous University of Mexico
+    year: 2011
+  - course: BSc in Biology
+    institution: National Autonomous University of Mexico
+    year: 2006
 
 # Social/Academic Networking
 # For available icons, see: https://sourcethemes.com/academic/docs/page-builder/#icons
@@ -47,13 +45,13 @@ social:
   link: '#contact'  # For a direct email link, use "mailto:test@example.org".
 - icon: twitter
   icon_pack: fab
-  link: https://twitter.com/GeorgeCushen
+  link: https://twitter.com/FabroVillalobos
 - icon: google-scholar
   icon_pack: ai
-  link: https://scholar.google.co.uk/citations?user=sIwtMXoAAAAJ
+  link: https://scholar.google.com/citations?user=9CxnRG4AAAAJ&hl=es&oi=ao
 - icon: github
   icon_pack: fab
-  link: https://github.com/gcushen
+  link: https://github.com/fabro
 # Link to a PDF of your resume/CV from the About widget.
 # To enable, copy your resume/CV to `static/files/cv.pdf` and uncomment the lines below.
 # - icon: cv
@@ -61,7 +59,7 @@ social:
 #   link: files/cv.pdf
 
 # Enter email to display Gravatar (if Gravatar enabled in Config)
-email: ""
+email: "fabricio.villalobos at gmail.com"
 
 # Organizational groups that you belong to (for People widget)
 #   Set this to `[]` or comment out if you are not using People widget.
@@ -70,6 +68,4 @@ user_groups:
 - Visitors
 ---
 
-Nelson Bighetti is a professor of artificial intelligence at the Stanford AI Lab. His research interests include distributed robotics, mobile computing and programmable matter. He leads the Robotic Neurobiology group, which develops self-reconfiguring robots, systems of self-organizing robots, and mobile sensor networks.
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.
+Our research interests comprise a broad array of topics related to the fields of macroecology, biogeography, community and theoretical ecology, ecophylogenetics, phylogenetic comparative methods and conservation biology. We are particularly interested in studying geographic patterns of biodiversity and the structure of ecological communities as well as understanding the causes that originate, maintain and alter such patterns. We focus mainly on vertebrates, especially mammals, but have work with other taxa including amphibians and birds, and currently have projects involving insects and plants. Currently, we integrate ecological and evolutionary approaches to study biogeographic and phylogenetic patterns, their relationship with the environment and the application of such studies to informed conservation assessments and actions.
