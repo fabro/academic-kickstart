@@ -42,7 +42,7 @@ education:
 social:
 - icon: envelope
   icon_pack: fas
-  link: '#contact'  # For a direct email link, use "fabricio.villalobos@gmail.com".
+  link: 'fabricio.villalobos@gmail.com'  # For a direct email link, use "fabricio.villalobos@gmail.com".
 - icon: twitter
   icon_pack: fab
   link: https://twitter.com/FabroVillalobos
