@@ -15,7 +15,7 @@ role: Investigador Titular A, SNI II
 # Organizations/Affiliations
 organizations:
 - name: Instituto de Ecología, A.C. 
-  url: ""
+  url: "https://www.inecol.mx/inecol/index.php/es/"
 
 # Short bio (displayed in user profile at end of posts)
 bio: My research interests include biodiversity patterns in space and time.
