@@ -28,7 +28,7 @@ interests:
 
 education:
   courses:
-  - course: PhD in Biological Sciences
+  - course: PhD in Biological Sciences TESTING
     institution: National Autonomous University of Mexico
     year: 2011
   - course: BSc in Biology
@@ -59,7 +59,7 @@ social:
    link: FabricioVillalobos_CV_Enero2020.pdf
 
 # Enter email to display Gravatar (if Gravatar enabled in Config)
-email: "fabricio.villalobos at gmail.com"
+email: fabricio.villalobos at gmail.com
 
 # Organizational groups that you belong to (for People widget)
 #   Set this to `[]` or comment out if you are not using People widget.
