@@ -90,7 +90,7 @@ address = {street = "Carretera Antigua a Coatepec 351", city = "Xalapa", region 
 
 # Geographic coordinates
 # To get your coordinates, right-click on Google Maps and choose "What's here?". The coords will show up at the bottom.
-coordinates = {latitude = "19.5123978", longitude = "-96.9454221"}
+coordinates = {latitude = "19.512375", longitude = "-96.942912"}
 
 # Directions for visitors to locate you.
 directions = "Edificio C, Tercer Piso"
@@ -257,7 +257,7 @@ plugins_js  = []
   # Map provider:
   #   0: No map
   #   1: Google Maps
-  #   2: OpenStreetMap (Mapnik)
+  2: OpenStreetMap (Mapnik)
   #   3: OpenStreetMap (Mapbox)
   engine = 2
   api_key = ""
