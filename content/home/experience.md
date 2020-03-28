@@ -8,8 +8,6 @@ weight = 40  # Order that this section will appear.
 title = "Experience"
 subtitle = ""
 
-author = "fabro"
-
 # Date format for experience
 #   Refer to https://sourcethemes.com/academic/docs/customization/#date-format
 date_format = "Jan 2006"
@@ -38,4 +36,5 @@ date_format = "Jan 2006"
   #date_end = ""
   description = """Advisor Graduate Program in Ecology and Evolution"""
 
+author = "fabro"
 +++
