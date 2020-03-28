@@ -4,7 +4,7 @@ name: Fabricio Villalobos
 
 # Username (this should match the folder name)
 authors:
-- admin
+- fabro
 
 # Is this the primary user of the site?
 superuser: true
