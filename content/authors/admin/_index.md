@@ -28,7 +28,7 @@ interests:
 
 education:
   courses:
-  - course: PhD in Biological Sciences TESTING
+  - course: PhD in Biological Sciences
     institution: National Autonomous University of Mexico
     year: 2011
   - course: BSc in Biology
