@@ -36,5 +36,6 @@ date_format = "Jan 2006"
   #date_end = ""
   description = """Advisor Graduate Program in Ecology and Evolution"""
 
+author = "fabro"
 +++
 
