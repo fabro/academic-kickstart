@@ -28,6 +28,9 @@ interests:
 
 education:
   courses:
+  - course: PostDoc in Ecology & Eviolution
+    institution: Federal University of Goiás, Brazil
+    year: 2012-2014
   - course: PhD in Biological Sciences
     institution: National Autonomous University of Mexico
     year: 2011
