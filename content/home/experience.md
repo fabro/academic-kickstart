@@ -34,6 +34,6 @@ date_format = "Jan 2006"
   location = "Goiânia, GO"
   date_start = "2013-03-01"
   #date_end = ""
-  description = """Graduate students advisor"""
+  description = """Advisor Graduate Program in Ecology and Evolution"""
 
 +++
