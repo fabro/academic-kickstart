@@ -1,6 +1,6 @@
 ---
 # Display name
-name: Evolutionary Macroecology lab
+name: Evolutionary Macroecology Lab
 
 # Username (this should match the folder name)
 authors:
@@ -10,7 +10,7 @@ authors:
 superuser: true
 
 # Role/position
-role: Research lab
+#role: Research lab
 
 # Organizations/Affiliations
 organizations:
