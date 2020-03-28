@@ -23,8 +23,8 @@ date_format = "Jan 2006"
   company_url = ""
   location = "Mexico"
   date_start = "2016-03-01"
-  date_end = ""
-  description = """
+  #date_end = ""
+  #description = """
 
 
 [[experience]]
@@ -33,7 +33,7 @@ date_format = "Jan 2006"
   company_url = "http://www.ecoevol.ufg.br/"
   location = "Goiânia, GO"
   date_start = "2013-03-01"
-  date_end = ""
+  #date_end = ""
   description = """Graduate students advisor"""
 
 +++
