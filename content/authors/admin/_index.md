@@ -64,8 +64,7 @@ email: fabricio.villalobos at gmail.com
 # Organizational groups that you belong to (for People widget)
 #   Set this to `[]` or comment out if you are not using People widget.
 user_groups:
-- Researchers
-- Visitors
+- Principal investigator
 ---
 
 Our research interests comprise a broad array of topics related to the fields of macroecology, biogeography, community and theoretical ecology, ecophylogenetics, phylogenetic comparative methods and conservation biology. We are particularly interested in studying geographic patterns of biodiversity and the structure of ecological communities as well as understanding the causes that originate, maintain and alter such patterns. We focus mainly on vertebrates, especially mammals, but have work with other taxa including amphibians and birds, and currently have projects involving insects and plants. Currently, we integrate ecological and evolutionary approaches to study biogeographic and phylogenetic patterns, their relationship with the environment and the application of such studies to informed conservation assessments and actions.
