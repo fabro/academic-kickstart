@@ -23,6 +23,8 @@ bio: Our research interests include biodiversity patterns in space and time.
 interests:
 - Macroecology
 - Biogeography
+- Macroevolution
+- Conservation Biogeography
 - Spatial statistics
 - Phylogenetic Comparative Methods
 
