@@ -21,7 +21,7 @@ organizations:
 bio: 
 
 interests:
-- Ictiology
+- Ichthyology
 - Poecilids
 - Macroecology
 - Macroevolution
@@ -31,9 +31,9 @@ education:
   - course: PhD in Biological Sciences
     institution: Instituto de Ecología, A.C.
     year: ongoin
-  - course: XX
-    institution: XX
-    year: 2???
+  - course: MSc
+    institution: Universidad Michoana de San Nicolás de Hidalgo, México
+    year: 2018
 
 # Social/Academic Networking
 # For available icons, see: https://sourcethemes.com/academic/docs/page-builder/#icons
