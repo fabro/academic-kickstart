@@ -10,7 +10,7 @@ authors:
 superuser: false
 
 # Role/position
-role: PhD Student
+role: PhD alumni
 
 # Organizations/Affiliations
 organizations:
@@ -29,7 +29,7 @@ education:
   courses:
   - course: PhD in Biological Sciences
     institution: Instituto de Ecología, A.C.
-    year: ongoin
+    year: 2020
   - course: XX
     institution: XX
     year: 2???
@@ -67,4 +67,4 @@ user_groups:
 ---
 
 PhD student, Instituto de Ecología A.C. (INECOL, México) and Université Paul Sabatier (France)
-Juan obtained his undergraduate degree in Biology from the Universidad de Antioquia (Colombia), where he began to study and explore freshwater fish ten years ago. Today, as a PhD student, he integrates ecology, evolution and conservation to better understand freshwater ecosystems and produce better tools for their long-term management and preservation. His PhD project has three primary objectives: 1) to determine the drivers of species’ range sizes of freshwater fishes; 2) to use macroecological patterns of species’ range size to evaluate the vulnerability of species; and 3) to assess the current and future vulnerability of freshwater fish species to major human-induced disturbances. Juan likes to ride bike and underwater sports.
+Juan obtained his undergraduate degree in Biology from the Universidad de Antioquia (Colombia), where he began to study and explore freshwater fish ten years ago. Today,he integrates ecology, evolution and conservation to better understand freshwater ecosystems and produce better tools for their long-term management and preservation. His PhD project had three primary objectives: 1) to determine the drivers of species’ range sizes of freshwater fishes; 2) to use macroecological patterns of species’ range size to evaluate the vulnerability of species; and 3) to assess the current and future vulnerability of freshwater fish species to major human-induced disturbances. Juan likes to ride bike and underwater sports.
