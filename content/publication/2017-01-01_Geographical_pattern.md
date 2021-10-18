@@ -1,0 +1,28 @@
++++
+title = "Geographical patterns of phylogenetic beta-diversity components in terrestrial mammals"
+date = "2017-01-01"
+authors = ["F.P. Peixoto", "F. Villalobos", "A.S. Melo", "J.A.F. Diniz-Filho", "R. Loyola", "T.F. Rangel", "M.V. Cianciaruso"]
+publication_types = ["2"]
+publication = "Global Ecology and Biogeography, (26), 5, _pp. 573-583_, https://doi.org/10.1111/geb.12561"
+publication_short = "Global Ecology and Biogeography, (26), 5, _pp. 573-583_, https://doi.org/10.1111/geb.12561"
+abstract = ""
+abstract_short = ""
+image_preview = ""
+selected = false
+projects = []
+tags = []
+url_pdf = ""
+url_preprint = ""
+url_code = ""
+url_dataset = ""
+url_project = ""
+url_slides = ""
+url_video = ""
+url_poster = ""
+url_source = ""
+math = true
+highlight = true
+[header]
+image = ""
+caption = ""
++++
