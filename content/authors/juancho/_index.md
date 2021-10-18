@@ -63,8 +63,7 @@ education:
 # Organizational groups that you belong to (for People widget)
 #   Set this to `[]` or comment out if you are not using People widget.
 user_groups:
-- Grad Students
+- Alumni
 ---
 
-PhD student, Instituto de Ecología A.C. (INECOL, México) and Université Paul Sabatier (France)
-Juan obtained his undergraduate degree in Biology from the Universidad de Antioquia (Colombia), where he began to study and explore freshwater fish ten years ago. Today,he integrates ecology, evolution and conservation to better understand freshwater ecosystems and produce better tools for their long-term management and preservation. His PhD project had three primary objectives: 1) to determine the drivers of species’ range sizes of freshwater fishes; 2) to use macroecological patterns of species’ range size to evaluate the vulnerability of species; and 3) to assess the current and future vulnerability of freshwater fish species to major human-induced disturbances. Juan likes to ride bike and underwater sports.
+Currently, Juan is a postdoctoral researcher at iDiv synthesis center (sDiv) in Germany. He obtained his PhD from by Instituto de Ecología A.C. (INECOL, México) and Université Paul Sabatier (France). Juan did his undergraduate in Biology at the Universidad de Antioquia (Colombia), where he began to study and explore freshwater fish ten years ago. Today,he integrates ecology, evolution and conservation to better understand freshwater ecosystems and produce better tools for their long-term management and preservation. His PhD project had three primary objectives: 1) to determine the drivers of species’ range sizes of freshwater fishes; 2) to use macroecological patterns of species’ range size to evaluate the vulnerability of species; and 3) to assess the current and future vulnerability of freshwater fish species to major human-induced disturbances. Juan likes to ride bike and underwater sports.
