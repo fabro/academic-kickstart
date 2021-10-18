@@ -10,7 +10,7 @@ authors:
 superuser: true
 
 # Role/position
-role: Investigador Titular A, SNI II
+role: Investigador Titular B, SNI II
 
 # Organizations/Affiliations
 organizations:
@@ -24,7 +24,9 @@ interests:
 - Macroecology
 - Biogeography
 - Spatial statistics
+- Macroevolution
 - Phylogenetic Comparative Methods
+- Conservation Biogeography
 
 education:
   courses:
