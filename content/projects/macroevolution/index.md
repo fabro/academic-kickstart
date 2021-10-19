@@ -38,15 +38,19 @@ preview_only = false
   
 +++
 
-Description
+**Description**
+
 Investigate macroevolutionary rates across time and within an spatial context
 
-Team
+**Team**
+
 Fabricio Villalobos, José Alexandre Diniz-Filho, Jesús N. Pinto-Ledezma, Julián A. Velasco, 
 
-Years
+**Years**
+
 Ongoing
 
-Funding
+**Funding**
+
 -CNPq-Brazil (INCT-EECBio, UFG)
 -Consejo Nacional de Ciencia y Tecnología: Ciencia Básica SEP-CONACYT
