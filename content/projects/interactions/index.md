@@ -28,7 +28,7 @@ highlight = true
 [image]
 
 #Caption (optional)
-caption = ""
+caption = "figure by Erick J. Corro"
 
 #Focal point (optional)
 #Options: Smart, Center, TopLeft, Top, TopRight, Left, Right, BottomLeft, Bottom, BottomRight
