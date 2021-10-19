@@ -30,7 +30,7 @@ education:
   courses:
   - course: PhD in Biological Sciences
     institution: Universidad Nacional Autónoma de México
-    year: ongoin
+    year:
   - course: MSc
     institution: 
     year:
