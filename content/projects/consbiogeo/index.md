@@ -8,7 +8,7 @@ draft = false
 tags = []
   
 # Project summary to display on homepage.
-summary = “Biogeographical and macroecological tools to inform conservation plans” 
+summary = "Biogeographical and macroecological tools to inform conservation plans"
   
 # Optional image to display on homepage.
 #image_preview = ""
