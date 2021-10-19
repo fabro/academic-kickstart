@@ -28,6 +28,13 @@ highlight = true
 image = "map_networks_EJC.png"
 #caption = ""
 
+image=
+  placement: 1
+  #caption: "Photo by [Geo](https://github.com/gcushen/)"
+  focal_point: "Center"
+  preview_only: true
+  #alt_text: An optional description of the image for screen readers.
+
 +++
 
 Description
