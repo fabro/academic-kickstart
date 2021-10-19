@@ -34,7 +34,7 @@ caption = ""
 #Options: Smart, Center, TopLeft, Top, TopRight, Left, Right, BottomLeft, Bottom, BottomRight
 
 focal_point = "Smart"
-preview_only = true  
+preview_only = false 
 
 
 +++
