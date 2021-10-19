@@ -66,4 +66,4 @@ user_groups:
 - Researchers
 ---
 
-I am Gabriel!
+I am Gabriel! Find more about at https://gamamo.netlify.app/
