@@ -40,11 +40,14 @@ preview_only = false
 
 **Description**
 
-Investigate macroevolutionary rates across time and within an spatial context
+Along with the description and evaluation of geographical biodiversity patterns, our research focuses on investigating the actual processes that change species numbers within and across the planet: evolutionary processes related to speciation, extinction and dispersal (Alves et al. 2017, Pinto-Ledezma et al. 2017, 2019). In the same vein, we are interested in the (macro)evolution of species traits as related to their macroecological patterns such as body size gradients (Velasco et al. 2020) or habitat preferences (Rodrigues et al. 2019). Evaluating such macroevolutionary processes at broad spatial scales has become commonplace in macroecology and several techniques are now being applied to the study of evolutionary diversification under a geographic perspective (see a review on this topic in Villalobos et al. 2020 (Rull V., Carnaval A. (eds) Neotropical Diversification: Patterns and Processes. Springer).
+
+Given the nature of both macroecological and macroevolutionary patterns driven by species traits and their evolutionary history, we rely heavily on Phylogenetic Comparative Methods (PCMs). For this same reason, we carefully consider PCMs and are also interested in applying, testing and sometimes developing PCMs to understand the tempo and mode of macroevolutionary and macroecological patterns (Alves et al. 2017, Bini et al. 2014, Diniz-Filho et al. 2015, Jardim et al. 2021).
+
 
 **Team**
 
-Fabricio Villalobos, José Alexandre Diniz-Filho, Jesús N. Pinto-Ledezma, Julián A. Velasco, 
+Fabricio Villalobos, José Alexandre Diniz-Filho, Jesús N. Pinto-Ledezma, Julián A. Velasco, ...
 
 **Years**
 
@@ -53,4 +56,4 @@ Ongoing
 **Funding**
 
 -CNPq-Brazil (INCT-EECBio, UFG)
--Consejo Nacional de Ciencia y Tecnología: Ciencia Básica SEP-CONACYT
+-Consejo Nacional de Ciencia y Tecnología-CONACYT
