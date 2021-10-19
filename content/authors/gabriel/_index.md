@@ -29,7 +29,7 @@ education:
   courses:
   - course: PhD in Biological Sciences
     institution: University of Findland 
-    year: ongoin
+    year: 
   - course: MSc
     institution: 
     year:
