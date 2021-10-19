@@ -8,7 +8,7 @@ draft = false
 tags = []
   
 # Project summary to display on homepage.
-summary = “Macroecological patterns under an evolutionary perspective” 
+summary = "Macroecological patterns under an evolutionary perspective"
   
 # Optional image to display on homepage.
 #image_preview = "map_networks_EJC.png"
