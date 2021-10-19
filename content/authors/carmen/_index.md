@@ -63,7 +63,7 @@ education:
 # Organizational groups that you belong to (for People widget)
 #   Set this to `[]` or comment out if you are not using People widget.
 user_groups:
-- Visitors
+- Researchers
 ---
 
 Me doctoré en Ciencias Biológicas en la Universidad Nacional Autónoma de México (UNAM) en 2019. Mi principal experiencia en investigación se ha centrado en aspectos de la ecología de paisajes tropicales, con un fuerte componente en biología de la conservación. Mi principal objetivo es contribuir a un mayor entendimiento de los efectos del cambio de uso de suelo en la biodiversidad. En particular, evalúo los efectos de la estructura de paisajes antrópicos principalmente en primates a escala regional y global. 
