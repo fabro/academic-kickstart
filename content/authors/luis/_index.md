@@ -29,7 +29,7 @@ interests:
 education:
   courses:
   - course: PhD in Biological Sciences
-    institution: University of Findland 
+    institution: Universidad Nacional Autónoma de México
     year: ongoin
   - course: MSc
     institution: 
