@@ -42,7 +42,7 @@ education:
 social:
 - icon: envelope
   icon_pack: fas
-  link: mailto:berenice.garcia@inecol.mx
+  link: mailto:berenice.garcia@posgrado.ecologia.edu.mx
 # - icon: twitter
 #  icon_pack: fab
 #  link: https://twitter.com/FabroVillalobos
