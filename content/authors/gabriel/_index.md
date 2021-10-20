@@ -21,9 +21,10 @@ organizations:
 bio: 
 
 interests:
+- Numerical Ecology
 - Macroecology
 - Diversity gradients
-- 
+- Environmental Impact Assessments
 
 education:
   courses:
@@ -38,16 +39,16 @@ education:
 # For available icons, see: https://sourcethemes.com/academic/docs/page-builder/#icons
 #   For an email link, use "fas" icon pack, "envelope" icon, and a link in the
 #   form "mailto:your-email@example.com" or "#contact" for contact widget.
-# social:
-# - icon: envelope
-#  icon_pack: fas
-  link: mailto:fabricio.villalobos@gmail.com
+ social:
+ - icon: envelope
+  icon_pack: fas
+  link: mailto:mandprogabriel@gmail.com
 # - icon: twitter
 #  icon_pack: fab
 #  link: https://twitter.com/FabroVillalobos
-# - icon: google-scholar
-#  icon_pack: ai
-#  link: https://scholar.google.com/citations?user=9CxnRG4AAAAJ&hl=es&oi=ao
+- icon: google-scholar
+  icon_pack: ai
+ link: https://scholar.google.com/citations?user=o4dBz6MAAAAJ&hl=es
 # - icon: github
 #  icon_pack: fab
 #  link: https://github.com/fabro
