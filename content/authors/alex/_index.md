@@ -41,7 +41,7 @@ education:
 social:
 - icon: envelope
   icon_pack: fas
-  link: mailto:alejandro.sanchez@inecol.mx
+  link: mailto:alejandro.sanchez@posgrado.ecologia.edu.mx
 # - icon: twitter
 #  icon_pack: fab
 #  link: https://twitter.com/FabroVillalobos
