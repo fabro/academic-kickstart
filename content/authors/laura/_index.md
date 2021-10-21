@@ -21,27 +21,28 @@ organizations:
 bio: 
 
 interests:
-- Conservation biology
-- Primatology
+- Mammalogy
 - Landscape ecology
+- Macroecology
 
 education:
   courses:
   - course: MSc in Biological Sciences
     institution: Instituto de Ecología, A.C.
     year: ongoin
-  - course:
-    institution: 
-    year:
+  - course: BSc in Biological Sciences	
+    institution: Universidad Autónoma de Ciudad Juárez, Mexico
+    year: 2016
     
 # Social/Academic Networking
 # For available icons, see: https://sourcethemes.com/academic/docs/page-builder/#icons
 #   For an email link, use "fas" icon pack, "envelope" icon, and a link in the
 #   form "mailto:your-email@example.com" or "#contact" for contact widget.
-# social:
-# - icon: envelope
-#  icon_pack: fas
-  link: mailto:fabricio.villalobos@gmail.com
+social:
+- icon: envelope
+  icon_pack: fas
+  link: mailto:laura.saldivar@posgrado.ecologia.edu.mx
+
 # - icon: twitter
 #  icon_pack: fab
 #  link: https://twitter.com/FabroVillalobos
@@ -66,4 +67,4 @@ user_groups:
 - Grad Students
 ---
 
-I am Laura!
+I am a biologist graduated from the Universidad Autónoma de Ciudad Juárez. I have worked with mammal and bird ecology in arid and forested areas in northern Mexico. Now I am pursuing my master's degree at INECOL A.C. The research is oriented to understand how two primate (Atelidae family) species respond to deforestation (i.e. habitat loss) in tropical forests of southeastern Mexico and testing the possible existence of extinction thresholds for these two species. I am also interested in investigating if there are extinction thresholds in the Americas for arboreal mammal species that are rainforest specialists.
