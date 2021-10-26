@@ -21,6 +21,7 @@ organizations:
 bio: 
 
 interests:
+- Mammals
 - Ecomorphology 
 - Macroecology
 - R programming
@@ -29,11 +30,11 @@ interests:
 education:
   courses:
   - course: PhD in Biological Sciences
+    institution: University of Queensland, Australia
+    year: 2014
+  - course: BSc in Biology
     institution: Universidad Nacional Autónoma de México
-    year:
-  - course: MSc
-    institution: 
-    year:
+    year: 2009
     
 # Social/Academic Networking
 # For available icons, see: https://sourcethemes.com/academic/docs/page-builder/#icons
@@ -67,4 +68,4 @@ user_groups:
 - Researchers
 ---
 
-I am Luis! Find more about me at https://luisdva.github.io/ 
+I am a mammalogist and conservation scientist. I grew up in Mexico City, where I studied Biology at Universidad Nacional Autónoma de México before earning a PhD at the University of Queensland, Australia. I have held research fellowships in Switzerland and Chile, and my current focus is on the ecology and evolution of small mammals. Additionally, I enjoy teaching and applying data cleaning, analysis, and visualization in the statistical programming language R. Find more about me at https://luisdva.github.io/ 
