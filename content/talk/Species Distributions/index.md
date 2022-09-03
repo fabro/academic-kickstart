@@ -49,7 +49,7 @@ authors = ["Fabricio Villalobos"]
 url_pdf = ""
 url_slides = ""
 url_video = ""
-url_code = <a href="ejercicio_presencias-distribuciones.html">Species distributions</a> <br>
+url_code = ""
 
 # Does the content use math formatting?
 #math = true
