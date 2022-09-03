@@ -5,7 +5,6 @@ title = "Species Distributions”
 authors = ["Fabricio Villalobos"]
 
 +++
-
 # Presencias y distribuciones geográficas de las especies
 
 **Macroecología**
