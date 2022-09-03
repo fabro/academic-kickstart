@@ -1,18 +1,18 @@
 +++
 title = "Species Richness & Scales"
-time_start = 2022-09-05T09:00:00
+
 # Authors. Comma separated list, e.g. `["Bob Smith", "David Jones"]`.
 authors = ["Fabricio Villalobos"]
 
   
 +++
----
-"Presencias y distribuciones geográficas de las especies"
+
+# Presencias y distribuciones geográficas de las especies"
 
 **Macroecología**
 Posgrado en Ciencias
 Instituto de Ecología, A.C.
----
+
 
 ##### parte del código está basado en la vignette del paquete `dismo` (Hijmans & Elith 2011) y código de Vijay Barve (https://vijaybarve.wordpress.com) para mapear con ggplot2
 
