@@ -6,8 +6,6 @@ authors = ["Fabricio Villalobos"]
 
 +++
 
-
----
 # Presencias y distribuciones geográficas de las especies
 
 **Macroecología**
@@ -15,7 +13,6 @@ authors = ["Fabricio Villalobos"]
 Posgrado en Ciencias
 
 Instituto de Ecología, A.C.
----
 
 ###### Parte del código está basado en la vignette del paquete `dismo` (Hijmans & Elith 2011) y código de Vijay Barve (https://vijaybarve.wordpress.com) para mapear con ggplot2
 
