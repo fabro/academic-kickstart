@@ -7,7 +7,6 @@ authors = ["Fabricio Villalobos"]
   
 +++
 
----
 # Filtros espaciales: agregando el "espacio" en la explicación de la riqueza
 
 **Macroecología**
@@ -15,7 +14,6 @@ authors = ["Fabricio Villalobos"]
 Posgrado en Ciencias
 
 Instituto de Ecología, A.C.
----
 
 
 Cargar los siguientes paquetes:
