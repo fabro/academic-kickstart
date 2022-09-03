@@ -1,5 +1,5 @@
 +++
-title = "<a href="http://fabro.github.io/ejercicio_presencias-distribuciones.html">Species distributions exercise</a>"
+title = "Species Distributions"
 
 # date = 2018-12-21T00:00:00  # Schedule page publish date.
 # draft = false
