@@ -6,7 +6,8 @@ authors = ["Fabricio Villalobos"]
 
   
 +++
----
+
+
 # Polígonos, riqueza y escalas
 
 **Macroecología**
@@ -14,7 +15,7 @@ authors = ["Fabricio Villalobos"]
 Posgrado en Ciencias
 
 Instituto de Ecología, A.C.
----
+
 
 **NOTA**: Si no han cerrado R, seguimos con el mismo espacio de trabajo, pero si lo cerraron, tienen que cargar el "workspace" (archivo .RData) del ejercicio anterior pues tiene los objetos que vamos a usar en este ejercicio.
 
