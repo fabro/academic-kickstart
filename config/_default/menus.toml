@@ -27,6 +27,11 @@
   name = "Contact"
   url = "#contact"
   weight = 60
+  
+[[main]]
+  name = "Courses"
+  url = "#talk"
+  weight = 60
 
 # Link to a PDF of your resume/CV from the menu.
 # To enable, copy your resume/CV to `static/files/FabricioVillalobos_CV_Enero2020.pdf` and uncomment the lines below.
