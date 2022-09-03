@@ -1,7 +1,6 @@
 +++
 title = "Species Richness & Scales"
-
-date = 2022-09-05T09:00:00
+time_start = 2022-09-05T09:00:00
 # Authors. Comma separated list, e.g. `["Bob Smith", "David Jones"]`.
 authors = ["Fabricio Villalobos"]
 
