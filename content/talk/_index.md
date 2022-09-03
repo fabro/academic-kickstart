@@ -1,5 +1,5 @@
 ---
-title: Course Materials
+title: "Course Materials"
 
 # View.
 #   1 = List
