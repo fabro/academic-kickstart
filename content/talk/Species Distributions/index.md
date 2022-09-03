@@ -6,7 +6,7 @@ title = "Species Distributions"
 # Talk start and end times.
 #   End time can optionally be hidden by prefixing the line with `#`.
 # time_start = 2018-05-01T19:00:00
-#time_end = 2030-06-01T15:00:00
+# time_end = 2030-06-01T15:00:00
 
 # Authors. Comma separated list, e.g. `["Bob Smith", "David Jones"]`.
 authors = ["Fabricio Villalobos"]
@@ -23,7 +23,7 @@ authors = ["Fabricio Villalobos"]
 #location = "Facultad de Ciencias, Universidad de la República. Montevideo, Uruguay."
 
 # Is this a selected talk? (true/false)
-#selected = true
+# selected = true
 
 # Projects (optional).
 #   Associate this talk with one or more of your projects.
@@ -31,11 +31,11 @@ authors = ["Fabricio Villalobos"]
 #   E.g. `projects = ["deep-learning"]` references 
 #   `content/project/deep-learning/index.md`.
 #   Otherwise, set `projects = []`.
-#projects = ["phd"]
+# projects = ["phd"]
 
 # Tags (optional).
 #   Set `tags = []` for no tags, or use the form `tags = ["A Tag", "Another Tag"]` for one or more tags.
-#tags = ["Open Data"]
+# tags = ["Open Data"]
 
 # Slides (optional).
 #   Associate this talk with Markdown slides.
@@ -65,3 +65,4 @@ url_code = ""
   focal_point = "Smart"
   
 +++
+<a href="http://fabro.github.io/ejercicio_presencias-distribuciones.html">Species distributions exercise</a>
