@@ -4,8 +4,9 @@ title = "Species Distributions”
 # Authors. Comma separated list, e.g. `["Bob Smith", "David Jones"]`.
 authors = ["Fabricio Villalobos"]
 
-  
 +++
+
+
 ---
 # Presencias y distribuciones geográficas de las especies
 
