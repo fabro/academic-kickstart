@@ -7,7 +7,7 @@ authors = ["Fabricio Villalobos"]
   
 +++
 ---
-# Presencias y distribuciones geográficas de las especies"
+# Presencias y distribuciones geográficas de las especies
 
 **Macroecología**
 
