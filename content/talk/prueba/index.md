@@ -6,15 +6,18 @@ authors = ["Fabricio Villalobos"]
 
   
 +++
-
+---
 # Presencias y distribuciones geográficas de las especies"
 
 **Macroecología**
+
 Posgrado en Ciencias
+
 Instituto de Ecología, A.C.
+---
 
+###### Parte del código está basado en la vignette del paquete `dismo` (Hijmans & Elith 2011) y código de Vijay Barve (https://vijaybarve.wordpress.com) para mapear con ggplot2
 
-##### parte del código está basado en la vignette del paquete `dismo` (Hijmans & Elith 2011) y código de Vijay Barve (https://vijaybarve.wordpress.com) para mapear con ggplot2
 
 Ya vimos de dónde vienen los datos primarios de biodiversidad (e.g. datos de presencia; almacenados en museos, colecciones científicas). Muchos de esos datos ahora están disponibles en internet!!!
 
