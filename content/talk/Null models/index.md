@@ -7,7 +7,6 @@ authors = ["Fabricio Villalobos"]
   
 +++
 
----
 # Modelos nulos en el ensamblaje de comunidades
 
 **Macroecología**
@@ -15,7 +14,7 @@ authors = ["Fabricio Villalobos"]
 Posgrado en Ciencias
 
 Instituto de Ecología, A.C.
----
+
 
 #### ¿Cuáles son las preguntas? 
 ##### 1) ¿Los ensamblajes de especies observados son distintos a muestras aleatorias? "nulo nulo"
