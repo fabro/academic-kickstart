@@ -7,7 +7,6 @@ authors = ["Fabricio Villalobos"]
   
 +++
 
----
 # Enfoque Range-Diversity (análisis simultáneo de riqueza y distribución)
 
 **Macroecología**
@@ -15,7 +14,6 @@ authors = ["Fabricio Villalobos"]
 Posgrado en Ciencias
 
 Instituto de Ecología, A.C.
----
 
 
 A partir de una matriz de presencia-ausencia, que representa información de riqueza y distribución, podemos demostrar la relación intrínseca entre estas dos propiedades fundamentales de la biodiversidad (Arita et al. 2008; 2012). Vamos a demostrarlo!
