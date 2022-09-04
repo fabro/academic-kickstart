@@ -1,6 +1,6 @@
 ---
 title: "Macroecología - INECOL 2022"
-subtitle: "Ejercicios prácticos"
+subtitle: "Ejercicios prácticos en R"
 
 # View.
 #   1 = List
