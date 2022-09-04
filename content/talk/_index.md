@@ -1,5 +1,6 @@
 ---
-title: "Course Materials"
+title: "Macroecología - INECOL 2022"
+subtitle: "Ejercicios prácticos"
 
 # View.
 #   1 = List
