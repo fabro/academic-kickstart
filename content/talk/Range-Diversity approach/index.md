@@ -11,9 +11,7 @@ authors = ["Fabricio Villalobos"]
 
 **Macroecología**
 
-Posgrado en Ciencias
-
-Instituto de Ecología, A.C.
+Universidad de Buenos Aires
 
 A partir de una matriz de presencia-ausencia, que representa información de riqueza y distribución, podemos demostrar la relación intrínseca entre estas dos propiedades fundamentales de la biodiversidad (Arita et al. 2008; 2012). Vamos a demostrarlo!
 
@@ -59,11 +57,12 @@ prop.meanrange <- meanrange/N
 ```
 ¿Qué tal? ¿Los valores son iguales/diferentes?
 
-Ahora con datos reales!!! Usaremos los datos y funciones del paquete `letsR` (shameless selfpromotion ;) )
+Ahora con datos reales!!! Usaremos los datos y funciones del paquete letsR (shameless selfpromotion ;) )
 
 Cargar el paquete y obtener los datos
 ```{r eval=FALSE}
-library(letsR) # Data Handling and Analysis in Macroecology
+library(letsR)
+
 data("Phyllomedusa")
 ```
 
@@ -77,7 +76,7 @@ Graficar el resultado
 ```{r eval=FALSE}
 plot(pam.phyllomedusa)
 
-#tambien da para ver una solamente una especie (e.g. para checar que la distribucinó esté correcta)
+#tambien da para ver una solamente una especie (e.g. para checar que la distribución esté correcta)
 plot(pam.phyllomedusa, name="Phyllomedusa nordestina")
 ```
 
