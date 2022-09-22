@@ -6,6 +6,6 @@ authors = ["Fabricio Villalobos"]
 
   
 +++
-<a href="R_Macroecologia_INECOL_2022.txt">Software y paquetes</a>
+<a href="R_Macroecologia_UBA_2022.txt">Software y paquetes</a>
 
-<a href="https://www.dropbox.com/sh/rkz173n31q63dx4/AACHQHHMEsazbF_YTXopb4iia?dl=0">Datos para ejercicios</a>
+<a href="https://www.dropbox.com/sh/mama8ya8qbkj7f8/AADVP1ifRa5a9_IS0ltMmwwca?dl=0">Datos para ejercicios</a>
