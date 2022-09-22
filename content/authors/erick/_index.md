@@ -10,7 +10,7 @@ authors:
 superuser: false
 
 # Role/position
-role: PhD Student
+role: PhD alumni
 
 # Organizations/Affiliations
 organizations:
@@ -29,7 +29,7 @@ education:
   courses:
   - course: PhD in Biological Sciences
     institution: Instituto de Ecología, A.C.
-    year: ongoin
+    year: 2022
   - course: XX
     institution: XX
     year: 2???
@@ -63,7 +63,7 @@ social:
 # Organizational groups that you belong to (for People widget)
 #   Set this to `[]` or comment out if you are not using People widget.
 user_groups:
-- Grad Students
+- Alumni
 ---
 
-Mi nombre es Erick Joaquín Corro Méndez soy biólogo egresado de la Benemérita Universidad Autónoma de Puebla y maestro en ciencias por el Instituto de Ecología A.C. Actualmente me encuentro estudiando el doctorado en ciencias en el Instituto de Ecología A.C. Mi proyecto se enfoca en estudiar cómo las redes de interacción y la señal filogenética de las interacciones de frugivoría por murciélagos se estructuran espacialmente a lo largo del Neotrópico.  Mis intereses académicos involucran el estudio de las interacciones ecológicas (tanto mutualismos como antagonismos) entre diferentes grupos de plantas y animales, utilizando herramientas cómo las redes de interacción, la ecología del paisaje y la macroecología.
+Mi nombre es Erick Joaquín Corro Méndez soy biólogo egresado de la Benemérita Universidad Autónoma de Puebla y maestro y Doctor en ciencias por el Instituto de Ecología A.C. Actualmente soy profesor de la Universidad Veracruzana, campus Córdoba. Mis intereses académicos involucran el estudio de las interacciones ecológicas (tanto mutualismos como antagonismos) entre diferentes grupos de plantas y animales, utilizando herramientas cómo las redes de interacción, la ecología del paisaje y la macroecología.
