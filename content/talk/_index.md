@@ -1,5 +1,5 @@
 ---
-title: "Macroecología - INECOL 2022"
+title: "Macroecología - UBA 2022"
 subtitle: "Ejercicios prácticos en R"
 
 # View.
