@@ -41,7 +41,7 @@ education:
 social:
 - icon: envelope
   icon_pack: fas
-  link: mailto:axel.arango@posgrado.ecologia.edu.mx
+  link: mailto:lopezreyes.ka@gmail.com
 # - icon: twitter
 #  icon_pack: fab
 #  link: https://twitter.com/FabroVillalobos
