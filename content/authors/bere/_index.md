@@ -64,7 +64,7 @@ social:
 # Organizational groups that you belong to (for People widget)
 #   Set this to `[]` or comment out if you are not using People widget.
 user_groups:
-- Grad Students
+- Alumni
 ---
 
 I’m a biologist and I obtained an M.Sc. degree from Universidad Michoacana de San Nicolas de Hidalgo, Mexico. In my previous phylogeographic researches using molecular biology, I tested the effect of climate oscillation through time and tectovolcanic activity on population structure, genetic diversity, and phylogenetic relationships in freshwater fishes of central Mexico. In my doctorate at INECOL, I’m interested in understanding how diversity is shaped along ecological gradients and why some lineages are so diverse. At Laboratorio de Macroecologia Evolutiva I am learning how to address these questions using as a biological model the family Poeciliidae under a macroecological and macroevolutionary approach.
