@@ -64,7 +64,7 @@ social:
 # Organizational groups that you belong to (for People widget)
 #   Set this to `[]` or comment out if you are not using People widget.
 user_groups:
-- Grad Students
+- Alumni
 ---
 
 I am a biologist graduated from the Universidad Autónoma de Ciudad Juárez. I have worked with mammal and bird ecology in arid and forested areas in northern Mexico. Now I am pursuing my master's degree at INECOL A.C. The research is oriented to understand how two primate (Atelidae family) species respond to deforestation (i.e. habitat loss) in tropical forests of southeastern Mexico and testing the possible existence of extinction thresholds for these two species. I am also interested in investigating if there are extinction thresholds in the Americas for arboreal mammal species that are rainforest specialists.
