@@ -1,5 +1,5 @@
 +++
-title = "Species Distributions"
+title = "Species geographic distributions"
 
 # Authors. Comma separated list, e.g. `["Bob Smith", "David Jones"]`.
 authors = ["Fabricio Villalobos"]
@@ -11,9 +11,9 @@ authors = ["Fabricio Villalobos"]
 
 **Macroecología**
 
-Universidad de Buenos Aires
+Instituto de Ecología, A.C.  - INECOL
 
-##### parte del código está basado en la vignette del paquete `dismo` (Hijmans & Elith 2011) y código de Vijay Barve (https://vijaybarve.wordpress.com) para mapear con ggplot2 y Google Maps
+##### parte del código está basado en la vignette del paquete `dismo` (Hijmans & Elith 2011), código de Vijay Barve (https://vijaybarve.wordpress.com) y Luis Verde-Arregoitia (https://luisdva.github.io/)
 
 Ya vimos de dónde vienen los datos primarios de biodiversidad (e.g. datos de presencia; almacenados en museos, colecciones científicas). Muchos de esos datos ahora están disponibles en internet!!!
 
@@ -32,194 +32,182 @@ library(tidyterra)
 library(ggplot2)
 library(rgbif)
 library(dplyr)
+library(alphahull)
+library(rangeBuilder)
+
 ```
 
 Obtener datos de presencia de una especie cualquiera a partir de la base de datos GBIF (data.gbif.org) directamente desde R!
 **NOTA**: Necesitan estar conectados a internet. Este proceso puede tardar, dependiendo de la especie, si esta tiene (o no) muchos registros
 
 ```{r eval=FALSE}
-sp_1 <- occ_search(scientificName = "Lycalopex culpaeus", limit = 1000)
+sp_datos <- occ_data(scientificName = "Musonycteris harrisoni", limit = 500)
 ```
 **NOTA**: Uds podrían colocar el nombre del género y la especie deseada.
 
-El objeto `sp_1` es una lista con datos sobre los resultados obtenidos en GBIF, para trabjar únicamente con la tabla de registros hay que seleccionar el objeto _data_ dentro del mismo
+El objeto `sp_datos` es una lista con datos sobre los resultados obtenidos en GBIF, para trabjar únicamente con la tabla de registros hay que seleccionar el objeto _data_ dentro del mismo
 ```{r eval=FALSE}
-sp_1 <- sp_1$data
+sp_datos <- sp_datos$data
 ```
 
 Ver las dimensiones del objeto generado (i.e. cuántas líneas y cuántas columnas tiene)
 ```{r eval=FALSE}
-dim(sp_1)
+dim(sp_datos)
 ```
 Checar el nombre de las columnas (para después buscar únicamente las de posición geográfica: lat/long)
 ```{r eval=FALSE}
-names(sp_1)
+names(sp_data)[1:30]
 ```
 
-Crear otro objeto a partir del anterior para quedarse únicamente con long/lat
+Crear otro objeto a partir del anterior para quedarse únicamente con long/lat. Quedarse únicamente con los puntos/registros individuales (i.e., excluir duplicados). Transformarlo en un objeto espacial
 
 ```{r eval=FALSE}
-sp1_points <- select(sp_1,decimalLongitude,decimalLatitude)
+sp_p1<-sp_data %>%
+	select(decimalLongitude,decimalLatitude,species) %>%
+	mutate(lat=decimalLatitude,lon=decimalLongitude) %>%
+	distinct() %>%
+	na.omit() %>% 
+	sf::st_as_sf(coords = c('decimalLongitude','decimalLatitude'),crs="EPSG: 4326")
+
 ```
 **NOTA**: el nombre de la variable puede ser diferente (.e.g "LATITUDE", "Latidude", "lat", etc. Siempre hay que checar antes)
 
-Graficar esos puntos (x,y)
+Graficar (poner en un mapa) los puntos de presencia de nuestra especie
 ```{r eval=FALSE}
-ggplot(sp1_points)+
- geom_point(aes(decimalLongitude,decimalLatitude),
-            col="blue",pch=19)
+ggplot()+ 
+	geom_sf(data=sp_p1, col="blue",pch=19)
 ```
+
 Agregar el mapa del mundo. Para eso, necesitamos cargar el mapa (que viene con el paquete "rnaturalearth")
 ```{r eval=FALSE}
-wrld <- ne_countries(scale = "small",returnclass = "sf") # división política 
-
+wrld <- ne_countries(scale = "small",returnclass = "sf") 
 ```
 
-¿Hay algún dato extraño?
-¿Notaron alguna advertencia, por qué salió?
-
-Dibujando por capas, primero la división política y luego los puntos. Para dibujar datos de objetos diferentes en `ggplot`, pasamos el nombre del objeto al argumento `data` de cada capa que queremos graficar.
-
-Graficar primero el mundo y después los puntos
 ```{r eval=FALSE}
 ggplot()+
- geom_sf(data=wrld)
+	geom_sf(data=wrld)+geom_sf(data=sp_p1,col="blue",pch=19,size=1)+coord_sf(expand = F) +
+	labs(x="Longitud decimal ",
+	y="Latitud decimal",
+	title=expression(paste("Puntos reportados ", italic("Glossophaga morenoi"))))+
+	theme(plot.title = element_text(hjust = 0.5))
 ```
-Agregar los puntos
-```{r eval=FALSE}
-ggplot()+
- geom_sf(data=wrld)+
- geom_point(data=sp1_points,aes(decimalLongitude,decimalLatitude),
-            col="blue",pch=19,size=1)
-```
-**NOTA**: los argumentos "size" y "pch" simplemente definen el tamaño y tipo de los puntitos. Pueden jugar con eso y encontrar el que les parezca mejor.
+
+¿Hay algún dato extraño? Los puntos/registros necesitan ser "curados" (limpiados)
 
 Dependiendo de la especie, el mapa puede ser muy grande, ¿cierto? Da para generar un mapa "menor", sabiendo en dónde están nuestros puntos.
 En ese caso, vamos a crear un mapa sólo para Argentina (o pra cualquer país, sólo hay que cambier el "NAME")
 
 ```{r eval=FALSE}
-arg_map <- filter(wrld,name=="Argentina")
-```
+mex_map <- filter(wrld,name=="Mexico")
 
-Ahora pueden repetir los pasos anteriores y mapear únicamente para Argentina (o el país que hayan escogido).
-
-
-```{r eval =FALSE}
 ggplot()+
- geom_sf(data=arg_map)+
- geom_point(data=sp1_points,aes(decimalLongitude,decimalLatitude),
-            col="blue",pch=19,size=1)
+	geom_sf(data=mex_map)+
+	geom_sf(data=sp_p1,col="blue",pch=19,size=1)+
+	coord_sf(expand = F)
 ```
-
-
-# Data checking & cleaning 
-
-Checar si hay "duplicados"
-```{r eval=FALSE}
-sp1_dups <- duplicated(sp1_points)
-### NOTA: la función "duplicated" retorna el resultado de una prueba lógica (e.g. TRUE or FALSE)
-# ¿cuántos son duplicados?
-length(which(sp1_dups==TRUE))
-# ¿cuántos NO son duplicados?
-length(which(sp1_dups==FALSE))
-# Quedarse sólo con los registros únicos (respecto a la combinación long/lat)
-sp1_nodups <- distinct(sp1_points)
-# ¿Cuáles son las dimensiones de ese objeto nuevo?
-dim(sp1_nodups)
-# Ver los primero elementos/datos del nuevo
-head(sp1_nodups)
-```
-
-Checar si hay datos con longitud/latitud cero
-```{r eval=FALSE}
-#longitud
-filter(sp1_nodups,decimalLongitude==0)
-#latitud
-filter(sp1_nodups,decimalLatitude==0)
-```
-**NOTA**: Acordarse que los nombres pueden ser diferentes (Latitude, latitude, lat, etc...)
-Usamos la función `filter` para buscar filas que cumplan con nuestra condición (ej: que los valores para la longitud o latitud sean iguales a 0).
-
-Checar que no haya datos con NAs
-```{r eval=FALSE}
-filter(sp1_nodups,is.na(decimalLatitude))
-filter(sp1_nodups,is.na(decimalLongitude))
-# eliminar registros sin datos
-sp1_points_nonas  <- na.omit(sp1_nodups)
-```
-Usamos `is.na` para revisar si un elemento es NA o no. Noten que al haber eliminado los registros duplicados primero, solo queda una fila con NAs. ¿Cuántos registros eran NA inicialmente?
-
 
 # Ejercicio 2
 
-
-```{r eval=FALSE}
-jaguarundi <- occ_data(scientificName = 'Herpailurus yagouaroundi', hasCoordinate = TRUE)
-```
-**NOTA**: Uds pueden escoger la especie que quieran.
-
-Obtener el mapa del mundo
-```{r eval=FALSE}
-world = ne_countries(scale = "small", returnclass = "sf")
-```
-
-Graficar los puntos usando el mapa como poligono y definiendo características a los puntos (color, tamaño, etc)
-```{r eval=FALSE}
-ggplot(world) +
-  geom_sf(fill = "white", # relleno de los países
-          color = "gray40", # color de los bordes de los polígonos
-          size = .2) + # ancho de los bordes
-      geom_jitter(data = jaguarundi$data, # jitter mueve los puntos para que no se encimen
-    aes(x=jaguarundi$data$decimalLongitude, 
-        y=jaguarundi$data$decimalLatitude), 
-    alpha=0.6, #transparencia de los puntos
-             size = 4, color = "red") +
-labs(title = "Herpailurus yagouarundi")
-
-```
-> Cuando el argumento "_size_" para el ancho de las líneas cambie su funcionamiento en futuras versiones de ggplot2, usar `linewidth`
-
-¿Quedó bien? ¿y usando otra especie?
-
-# Ejercicio 3
-
 ## Range maps from point data
-En esta parte, se usaran funciones para generar mapas "simples" basados en la geometría (e.g. distancias entre puntos, etc.). NO consideran variables ambientales!
+En esta parte, se usaran funciones para generar mapas "simples" basados en la geometría (e.g. distancias/ángulos entre puntos, etc.). NO consideran variables ambientales!
 
-## Convex hull 
+## Convex hull (minimum convex polygon)
 Este modelo crea un polígono convexo alrededor de los puntos de presencia.
 ```{r eval=FALSE}
-#crear un raster que va a usarse como "máscara"
-r <- raster()
-values(r) <- 1
-ext <- c(-80,-50,-60,5)
-r1 <- crop(r,ext)
-
-sp_hull <- convHull(sp1_points_nonas)
-sp_hullmodel <- predict(sp_hull, r1)
-plot(sp_hullmodel, main='Convex Hull')
-plot(as(wrld,"Spatial"), add=TRUE) 
-points(sp1_points_nonas, pch='+')
+sp1_mcp <- st_convex_hull(st_union(sp_p1))
 ```
 
-## Círculos 
-Este modelo dibuja círculos alrededor de los puntos de presencia.
+¿Cómo se ve? 
+
+```{r eval=FALSE}`
+ggplot()+
+  geom_sf(data=mex_map)+
+  geom_sf(data=sp1_mcp,
+          fill="blue")
+```		  
+
+## Polígono alfa (alpha hull)
+
+Usamos el paquete `alphahull`
+
+NOTA: Esta función solo acepta tablas como entrada
+
 ```{r eval=FALSE}
-sp_circ <- circles(sp1_points_nonas, lonlat=TRUE)
-sp_circles <- predict(r1, sp_circ, mask=TRUE)
+sp_p2<-as.data.frame(st_coordinates(sp_p1))
 
-plot(sp_circles, main='Circles')
-points(sp1_points_nonas, pch=19, cex=0.5, col="red")
-
-#Jugar con la distancia usada para diseñar los "circles"
-sp_circ2 <- circles(sp1_points_nonas, d=100000, lonlat = TRUE)
-sp_circles2 <- predict(r1, sp_circ2, mask=TRUE)
-
-plot(sp_circles2, main='Circles')
-points(sp1_points_nonas, pch=19, cex=0.5, col="red")
+sp1_alphahull <- ahull(sp_p2, alpha = 6)
 ```
 
-# Ejercicio 4
+Para observar el alpha hull, necesitamos que el objeto sea de tipo espacial del paquete `sf`. Para eso usaremos una función independiente, disponible en su carpeta de trabajo
+
+```{r eval=FALSE}
+source(file = "ah2sf.R")
+sp1_alphahull.poly <- ah2sf(sp1_alphahull)
+```
+
+
+¿Cómo se ve?
+
+```{r eval=FALSE}
+ggplot()+
+	geom_sf(data=mex_map)+geom_sf(data=sp1_alphahull.poly,fill="blue")
+```
+
+## Polígono alfa dinámico
+
+Usamos el paquete `rangeBuilder`, el cual crea un polígono alpha hull con un valor de alpha "óptimo" basado en la distribución espacial de los puntos.
+
+```{r eval=FALSE}
+sp_range <- getDynamicAlphaHull(
+  sp_p2, #Tabla de puntos/registros de la especie
+  coordHeaders = c("decimalLongitude", "decimalLatitude"),# x y y
+  fraction = 0.95,   # la fracción mínima de registros que debe incluir el polígono
+  partCount = 2,  # el máximo de polígonos disyuntos permitidos
+  initialAlpha = 1, # Alpha inicial
+  alphaIncrement = 0.5,
+  alphaCap = 1000,
+  clipToCoast = "terrestrial"  # solo la parte terrestre del polígono se mantendrá (se cortan las partes no-terrestres/acuáticas con base en un mapa descargado de naturalearth).
+)
+```
+
+```{r eval=FALSE}
+alpha <- sp_range[[2]]
+alpha
+```
+
+Convertir el polígono alpha a un objeto sf
+
+```{r eval=FALSE}
+sp1_dynalpha <- st_make_valid(st_as_sf(sp_range[[1]]))
+```
+
+¿Cómo podemos visualizarlo?
+
+```{r eval=FALSE}
+ggplot()+ geom_sf(data=mex_map)+ 
+  geom_sf(data=sp1_dynalpha, fill="blue")
+
+```
+
+## Y ....¿Cómo se ven todos los polígonos?
+
+```{r eval=FALSE}
+ggplot()+
+  geom_sf(data=mex_map)+ geom_sf(data=sp1_mcp,fill="red",alpha=0.1) +
+  geom_sf(data=sp1_alphahull.poly,fill="yellow",alpha=0.5) +
+  geom_sf(data=sp1_dynalpha, fill="blue",alpha=0.5)
+```
+
+Finalmente, podemos salvar esos polígonos como `shapefiles`, para usarlos en otros software (e.g. ArcGIS) y eventualmente juntar los de varias especies para otros análisis (ejercicio siguiente)
+
+```{r eval=FALSE}
+st_write(sp1_mcp, "sp1_min_convex.shp")
+st_write(sp1_alphahull.poly, "sp1_alphahull.shp")
+st_write(sp1_dynalpha, "sp1_dyn_alphahull.shp")
+```
+
+
+# Ejercicio 3
 
 Ahora, vamos a incluir datos ambientales/climáticos
 
@@ -229,7 +217,7 @@ world_bioclim<-getData("worldclim", var = "bio", res = 10)
 ```
 
 ```{r eval=FALSE, echo=FALSE, results='hide',message=FALSE}
-world_bioclim <- getData(name='worldclim',res=10,var='bio',path="/Users/fabro/laboratorio Macroecología/Cursos/posgrado_INECOL/Macroecologia/",download = F)
+world_bioclim <- getData(name='worldclim',res=10,var='bio',path="/Users/fabricio/Library/CloudStorage/Dropbox/Macroecologia_2023/",download = F)
 ```
 
 Estas variables están todas "juntas". Vamos a separarlas y dejar un objeto a parte que se puede usar para agarrar cada una de las variables separadas una por una
@@ -273,7 +261,7 @@ ggplot()+
 ```
 
 
-Grafiquen algunas de esas variables para América y para Argentina. Para eso, hay que modificar el "ext=matrix(c(XX,XX,XX,XX)))" de la función anterior, colocando las coordenadas correctas para América y para México (Por separado, o sea, un mapa para cada una)
+Grafiquen algunas de esas variables para América y para México. Para eso, hay que modificar el "ext=matrix(c(XX,XX,XX,XX)))" de la función anterior, colocando las coordenadas correctas para América y para México (Por separado, o sea, un mapa para cada una)
 
 
 # Ejercicio 5
