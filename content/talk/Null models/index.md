@@ -11,7 +11,7 @@ authors = ["Fabricio Villalobos"]
 
 **Macroecología**
 
-Universidad de Buenos Aires
+Instituto de Ecología, A.C. - INECOL
 
 
 #### ¿Cuáles son las preguntas? 
