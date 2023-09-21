@@ -64,7 +64,7 @@ social:
 # Organizational groups that you belong to (for People widget)
 #   Set this to `[]` or comment out if you are not using People widget.
 user_groups:
-- Grad Students
+- Alumni
 ---
 
 I am biologist (UAZ, 2014) and master in Biodiversity and Conservation (UAEH, 2017), my work is focused on understand the macroecological and macroevolutionary patterns of Vipers distribution. In my free time, I like to exercise, watching movies and to search for vipers. 
