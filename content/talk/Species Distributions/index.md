@@ -41,18 +41,18 @@ Obtener datos de presencia de una especie cualquiera a partir de la base de dato
 **NOTA**: Necesitan estar conectados a internet. Este proceso puede tardar, dependiendo de la especie, si esta tiene (o no) muchos registros
 
 ```{r eval=FALSE}
-sp_datos <- occ_data(scientificName = "Musonycteris harrisoni", limit = 500)
+sp_datos <- occ_search(scientificName = "Musonycteris harrisoni", limit = 500)
 ```
 **NOTA**: Uds podrían colocar el nombre del género y la especie deseada.
 
 El objeto `sp_datos` es una lista con datos sobre los resultados obtenidos en GBIF, para trabjar únicamente con la tabla de registros hay que seleccionar el objeto _data_ dentro del mismo
 ```{r eval=FALSE}
-sp_datos <- sp_datos$data
+sp_data <- sp_datos$data
 ```
 
 Ver las dimensiones del objeto generado (i.e. cuántas líneas y cuántas columnas tiene)
 ```{r eval=FALSE}
-dim(sp_datos)
+dim(sp_data)
 ```
 Checar el nombre de las columnas (para después buscar únicamente las de posición geográfica: lat/long)
 ```{r eval=FALSE}
@@ -88,23 +88,48 @@ ggplot()+
 	geom_sf(data=wrld)+geom_sf(data=sp_p1,col="blue",pch=19,size=1)+coord_sf(expand = F) +
 	labs(x="Longitud decimal ",
 	y="Latitud decimal",
-	title=expression(paste("Puntos reportados ", italic("Glossophaga morenoi"))))+
+	title=expression(paste("Puntos reportados ", italic("Musonycteris harrisoni"))))+
 	theme(plot.title = element_text(hjust = 0.5))
 ```
 
 ¿Hay algún dato extraño? Los puntos/registros necesitan ser "curados" (limpiados)
 
-Dependiendo de la especie, el mapa puede ser muy grande, ¿cierto? Da para generar un mapa "menor", sabiendo en dónde están nuestros puntos.
-En ese caso, vamos a crear un mapa sólo para Argentina (o pra cualquer país, sólo hay que cambier el "NAME")
+Eliminar los puntos con mala georeferencia (en este caso, puntos obvios en el "viejo mundo")
+
+```{r eval=FALSE}
+sp_p1<-sp_data%>%
+  select(decimalLongitude,decimalLatitude,species)%>%
+  mutate(lat=decimalLatitude,lon=decimalLongitude)%>%
+  distinct() %>% na.omit() %>% 
+  sf::st_as_sf(coords = c('decimalLongitude','decimalLatitude'),crs="EPSG: 4326")%>%
+  filter(lat> 0.5) %>% filter(lat< 22)
+```
+
+Ahora sí, mapeamos de nuevo pero sólamente en la región de interés (México)
 
 ```{r eval=FALSE}
 mex_map <- filter(wrld,name=="Mexico")
-
-ggplot()+
-	geom_sf(data=mex_map)+
-	geom_sf(data=sp_p1,col="blue",pch=19,size=1)+
-	coord_sf(expand = F)
 ```
+
+```{r eval=FALSE}
+ggplot()+geom_sf(data=mex_map)+
+  geom_sf(data=sp_p1,col="blue",pch=19,size=1)+coord_sf(expand = F)
+```
+
+Y ¿Cómo eliminamos los registros que están en el mar?
+
+```{r eval=FALSE}
+sp_p1<-sp_data%>%
+  select(decimalLongitude,decimalLatitude,species)%>%
+  mutate(lat=decimalLatitude,lon=decimalLongitude)%>%
+  distinct() %>%
+  na.omit() %>% 
+  sf::st_as_sf(coords = c('decimalLongitude','decimalLatitude'),crs="EPSG: 4326")%>%
+  filter(lat> 0.5) %>%
+  filter(lat< 22)%>%
+  filter(lon> -105.56611)
+```
+
 
 # Ejercicio 2
 
@@ -119,7 +144,7 @@ sp1_mcp <- st_convex_hull(st_union(sp_p1))
 
 ¿Cómo se ve? 
 
-```{r eval=FALSE}`
+```{r eval=FALSE}
 ggplot()+
   geom_sf(data=mex_map)+
   geom_sf(data=sp1_mcp,
@@ -137,14 +162,30 @@ sp_p2<-as.data.frame(st_coordinates(sp_p1))
 
 sp1_alphahull <- ahull(sp_p2, alpha = 6)
 ```
+*Error: shull: duplicate points found*
+
+Falla porque encuentra puntos duplicados o, como en este caso, puntos en una línea recta (i.e, mismo X y/o mismo Y).
+
+¿Cómo podemos identificar y solucionar este error?
+
+```{r eval=FALSE}
+sp_p3<-sp_p2 %>% select(X, Y)%>% 
+mutate(X = ifelse(duplicated(sp_p2$X), X + rnorm(1, mean = 0, sd = 0.0001), X))%>% 
+mutate(Y = ifelse(duplicated(sp_p2$Y), Y + rnorm(1, mean = 0, sd = 0.0001), Y))
+```
+
+Ahora si, podemos crear el Alpha Hull con un valor de alpha escogido (por la razón que crean relevante)
+
+```{r eval=FALSE}
+sp1_alphahull<- ahull(sp_p3, alpha = 6) 
+```
 
 Para observar el alpha hull, necesitamos que el objeto sea de tipo espacial del paquete `sf`. Para eso usaremos una función independiente, disponible en su carpeta de trabajo
 
 ```{r eval=FALSE}
-source(file = "ah2sf.R")
+source(file ="ejercicios_datos/ah2sf.R")
 sp1_alphahull.poly <- ah2sf(sp1_alphahull)
 ```
-
 
 ¿Cómo se ve?
 
@@ -159,7 +200,7 @@ Usamos el paquete `rangeBuilder`, el cual crea un polígono alpha hull con un va
 
 ```{r eval=FALSE}
 sp_range <- getDynamicAlphaHull(
-  sp_p2, #Tabla de puntos/registros de la especie
+  sp_p3, #Tabla de puntos/registros de la especie
   coordHeaders = c("decimalLongitude", "decimalLatitude"),# x y y
   fraction = 0.95,   # la fracción mínima de registros que debe incluir el polígono
   partCount = 2,  # el máximo de polígonos disyuntos permitidos
@@ -264,7 +305,6 @@ ggplot()+
 Grafiquen algunas de esas variables para América y para México. Para eso, hay que modificar el "ext=matrix(c(XX,XX,XX,XX)))" de la función anterior, colocando las coordenadas correctas para América y para México (Por separado, o sea, un mapa para cada una)
 
 
-# Ejercicio 5
 ##Ecological Niche Model (Bioclim)
 
 Vamos a quedarnos únicamente con dos variables
@@ -276,37 +316,37 @@ env.variables<- stack (bio1, bio12)
 
 Establecer el "extent" de América del Sur y cortar las variables para ese extent
 ```{r eval=FALSE}
-am.extent <- c(-100,-30,-60,14)
-am.env <- crop(env.variables,am.extent)
+mex.extent <- c(-117,-87,15,33)
+mex.env <- crop(env.variables,mex.extent)
 ```
 
 Generar el modelo Bioclim (Ecological Niche Model: ENM)
 ```{r eval=FALSE}
 # Convertir los puntos de la especie en un objeto tipo `matrix` 
-sp1_points_mat <- as.matrix(sp1_points_nonas)
+sp1_points_mat <- as.matrix(sp_p3)
 
 # Correr el ENM (Bioclim)
-sp1_bioclim <- bioclim(am.env, sp1_points_mat)
+sp1_bioclim <- bioclim(mex.env, sp1_points_mat)
 plot(sp1_bioclim, a=1, b=2, p=0.85)
 
 # Generar una predicción del área adecuada ("suitable") basada en el ENM
-sp1.map<- predict (am.env, sp1_bioclim)
+sp1.map<- predict (mex.env, sp1_bioclim)
 
 # Plotar o resultado da predição baseada no ENM
 plot (sp1.map)
 
 # Evaluar el modelo ENM
-group <- kfold(sp1_points_nonas, 5)
-pres_train <- sp1_points_nonas[group != 1, ]
-pres_test <- sp1_points_nonas[group == 1, ]
+group <- kfold(sp_p3, 5)
+pres_train <- sp_p3[group != 1, ]
+pres_test <- sp_p3[group == 1, ]
 
-backg <- randomPoints(am.env, n=1000, ext=am.extent, extf = 1.25) 
+backg <- randomPoints(mex.env, n=1000, ext=mex.extent, extf = 1.25) 
 colnames(backg) = c('lon', 'lat')
 group <- kfold(backg, 5)
 backg_train <- backg[group != 1, ]
 backg_test <- backg[group == 1, ]
 
-e <- evaluate(pres_test, backg_test, sp1_bioclim, am.env)
+e <- evaluate(pres_test, backg_test, sp1_bioclim, mex.env)
 
 # Establecer un "threshold" para cortar la predicción y generar un mapa binario
 threshold <- e@t[which.max(e@TPR + e@TNR)]
