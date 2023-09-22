@@ -60,7 +60,7 @@ education:
 #   link: files/cv.pdf
 
 # Enter email to display Gravatar (if Gravatar enabled in Config)
-# email: fabricio.villalobos at gmail.com
+email: martin.cabrera at posgrado.ecologia.edu.mx
 
 # Organizational groups that you belong to (for People widget)
 #   Set this to `[]` or comment out if you are not using People widget.
