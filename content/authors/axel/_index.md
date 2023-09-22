@@ -10,7 +10,7 @@ authors:
 superuser: false
 
 # Role/position
-role: PhD Student
+role: PhD alumni
 
 # Organizations/Affiliations
 organizations:
@@ -63,7 +63,7 @@ email: axel.arango at inecol.mx
 # Organizational groups that you belong to (for People widget)
 #   Set this to `[]` or comment out if you are not using People widget.
 user_groups:
-- Grad Students
+- Alumni
 ---
 
 Currently I am a PhD student at Instituto de Ecología A.C. (INECOL) within the Maevo Lab. My current work focuses on assessing the effects of the dispersion and dispersion capabilities of the new world’s Emberizoidea families (Aves:Passeriformes) on their diversification rates and patterns.
