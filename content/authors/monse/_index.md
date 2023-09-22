@@ -41,7 +41,7 @@ education:
 social:
 - icon: envelope
   icon_pack: fas
-  link: mailto:laura.saldivar@posgrado.ecologia.edu.mx
+  link: mailto:monserrat.juarez at posgrado.ecologia.edu.mx
 # - icon: twitter
 #  icon_pack: fab
 #  link: https://twitter.com/FabroVillalobos
@@ -58,7 +58,7 @@ social:
 #   link: files/cv.pdf
 
 # Enter email to display Gravatar (if Gravatar enabled in Config)
-email: monserrat.juarez at posgrado.ecologia.edu.mx
+# email: monserrat.juarez at posgrado.ecologia.edu.mx
 
 # Organizational groups that you belong to (for People widget)
 #   Set this to `[]` or comment out if you are not using People widget.
