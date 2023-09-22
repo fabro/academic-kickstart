@@ -41,7 +41,7 @@ education:
 social:
 - icon: envelope
   icon_pack: fas
-  link: mailto:monserrat.juarez at posgrado.ecologia.edu.mx
+  link: mailto:monserrat.juarez@posgrado.ecologia.edu.mx
 # - icon: twitter
 #  icon_pack: fab
 #  link: https://twitter.com/FabroVillalobos
