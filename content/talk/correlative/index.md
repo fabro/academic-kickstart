@@ -13,6 +13,9 @@ authors = ["Fabricio Villalobos"]
 
 Instituto de Ecología, A.C. - INECOL
 
+```{r klippy, echo=FALSE, include=TRUE}
+klippy::klippy()
+```
 
 **NOTA**: Tienen que cargar el "workspace" (archivo .RData) del ejercicio anterior pues este tiene los objetos que usaremos en este ejercicio.
 
