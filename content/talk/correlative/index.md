@@ -13,7 +13,7 @@ authors = ["Fabricio Villalobos"]
 
 Instituto de Ecología, A.C. - INECOL
 
-```{r klippy, echo=FALSE, include=TRUE}
+```{r klippy, message=FALSE, echo=FALSE}
 klippy::klippy()
 ```
 
