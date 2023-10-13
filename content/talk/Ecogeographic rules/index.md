@@ -7,11 +7,13 @@ authors = ["Fabricio Villalobos"]
   
 +++
 
-# Reglas Ecogeográficas: el caso de Rapoport
+# Regras Ecogeográficas: o caso do Rapoport
 
-**Macroecología**
+**Macroecologia**
 
-Instituto de Ecología, A.C. - INECOL
+Universidade Federal do Rio Grande do Sul
+Instituto de Biociências
+PPG-Ecologia
 
 ## Regla de Rapoport
 
@@ -24,13 +26,16 @@ library(letsR)
 
 Cargar la matriz de presencia-ausencia observada
 ```{r eval=FALSE}
-load("ejercicios_datos/bats_PAM.Rdata")
-bats.pam <- m.PAM
+load("ejercicios_datos/amsur_carniv_PAM.RData")
 ```
 
 Calcular el tamaño de range de las especies
 ```{r eval=FALSE}
-bats.ranges <- lets.rangesize(bats.pam, units = "cell")
+carniv.ranges  <- lets.rangesize(amsur.carniv.pam, units = "cell")
+# #cambiar "_" por " " en los nombres de las especies
+# carniv.ranges.spp <- rownames(carniv.ranges)
+# carniv.ranges.spp <- gsub(" ","_",carniv.ranges.spp)
+# rownames(carniv.ranges) <- carniv.ranges.spp
 ```
 Ahora tenemos un vector con los tamaños de range (número de celdas) de las especies
 
@@ -41,14 +46,16 @@ El enfoque interespecífico se basa en el análisis de las especies como unidade
 
 Obtener la ubicación de las especies. En este caso, el 'midpoint' de cada especie en el gradiente latitudinal
 ```{r eval=FALSE}
-bats.midpoints  <-lets.midpoint(bats.pam, planar = F)
+carniv.midpoints  <-lets.midpoint(amsur.carniv.pam, planar = F)
+# 
+# carniv.midpoints$Species <- gsub(" ","_",carniv.midpoints$Species)
 ```
 
 Listo! tenemos los datos, ahora poner a prueba la relación latitud~range size
 ```{r eval=FALSE}
-bats.lm <- lm(bats.ranges[,1]~abs(bats.midpoints[,3]))
+carniv.lm <- lm(carniv.ranges[,1]~abs(carniv.midpoints[,3]))
 
-summary(bats.lm)
+summary(carniv.lm)
 ```
 
 Pero, ¿y la cuestión evolutiva? ¿La relación (o falta de) se mantiene?
@@ -58,20 +65,20 @@ vamos a ponerlo a prueba!
 library(ape)
 library(caper)
 #cargar la filogenia de los carnívoros estudiados
-bats.tree <- read.tree("ejercicios_datos/bats_tree")
+carniv.tree <- read.tree("ejercicios_datos/amsur_carniv_phylo.txt")
 
-bats.tree$tip.label <- gsub("_"," ",bats.tree$tip.label)
+carniv.tree$tip.label <- gsub("_"," ",carniv.tree$tip.label)
 
 #prepare the data
-bats.data  <- cbind(bats.midpoints[,c(1,3)],bats.ranges)
-colnames(bats.data) <- c("Species","MidLat","Range_size")
+carniv.data  <- cbind(carniv.midpoints[,c(1,3)],carniv.ranges)
+colnames(carniv.data) <- c("Species","MidLat","Range_size")
 #crear un objeto "comparative data" necesario para el análisis, de acuerdo con lo que exige el paquete `caper`
-bats.compdata <- comparative.data(bats.tree,bats.data,Species,vcv=T)
+carniv.compdata <- comparative.data(carniv.tree,carniv.data,Species,vcv=T)
 
 #ajustar el modelo de regresión considerando la filogenia (PGLS: phylogenetic generalized least squares)
-bats.pgls <- pgls(Range_size~abs(MidLat),bats.compdata,lambda='ML')
+carniv.pgls <- pgls(Range_size~abs(MidLat),carniv.compdata,lambda='ML')
 
-summary(bats.pgls)
+summary(carniv.pgls)
 ```
 ¿Qué tal? ¿Qué resultados obtuvieron?
 
@@ -82,13 +89,13 @@ El enfoque de ensamblajes se basa en el análisis de los sitios (celdas) como un
 ```{r eval=FALSE}
 #Obtener los valores promedio por ensamblaje en cada celda
 #para eso, tenemos el paquete letsR! (shameless selfpromotion, again ;) )
-bats.medianRS <- lets.maplizer(bats.pam,bats.ranges[,1],rownames(bats.ranges), fun = median, ras=T)
+carniv.medianRS <- lets.maplizer(amsur.carniv.pam,carniv.ranges[,1],rownames(carniv.ranges), fun = median, ras=T)
 
 #la ubicación de cada celda/sitio ya la tenemos en la PAM (las primeras dos columnas).
 #Entonces, podemos tomar únicamente la latitud y probar la relación de la mediana del atributo (range size) y la latitud
-bats.lmSites  <- lm(bats.medianRS$Matrix[,3]~abs(bats.medianRS$Matrix[,2]))
+carniv.lmSites  <- lm(carniv.medianRS$Matrix[,3]~abs(carniv.medianRS$Matrix[,2]))
 
-summary(bats.lmSites)
+summary(carniv.lmSites)
 ```
 ¿Qué tal? ¿Qué nos dice ese resultado?
 
@@ -102,35 +109,35 @@ library(vegan)
 source("ejercicios_datos/p_s_components.R")
 
 #correr la función
-bats.pscomps <- p.s.comps(phy = bats.tree,sppnames = bats.midpoints[,1],data = bats.ranges,colnum = 1)
+carniv.pscomps <- p.s.comps(phy = carniv.tree,sppnames = carniv.midpoints[,1],data = carniv.ranges,colnum = 1)
 
 #espacializar los componentes
 #componente P
-bats.meanP <- lets.maplizer(bats.pam,bats.pscomps[[2]][,1],bats.midpoints[,1], fun = mean, ras=T)
+carniv.meanP <- lets.maplizer(amsur.carniv.pam,carniv.pscomps[[2]][,1],carniv.midpoints[,1], fun = mean, ras=T)
 #componente S
-bats.meanS <- lets.maplizer(bats.pam,bats.pscomps[[2]][,2],bats.midpoints[,1], fun = mean, ras=T)
+carniv.meanS <- lets.maplizer(amsur.carniv.pam,carniv.pscomps[[2]][,2],carniv.midpoints[,1], fun = mean, ras=T)
 
 #modelos lineales
 #componente filogenético
-bats.lm.meanP <- lm(bats.meanP$Matrix[,3]~abs(bats.pam$P[,2]))
+carniv.lm.meanP <- lm(carniv.meanP$Matrix[,3]~abs(amsur.carniv.pam$P[,2]))
 
-summary(bats.lm.meanP)
+summary(carniv.lm.meanP)
 
 #componente específico
-bats.lm.meanS <- lm(bats.meanS$Matrix[,3]~abs(bats.pam$P[,2]))
+carniv.lm.meanS <- lm(carniv.meanS$Matrix[,3]~abs(amsur.carniv.pam$P[,2]))
 
-summary(bats.lm.meanS)
+summary(carniv.lm.meanS)
 ```
 
 Grafiquemos los componentes!
 ```{r eval=FALSE}
 par(mfrow=c(1,3))
 #atributo original
-plot(bats.medianRS$Raster, main="observed range size")
+plot(carniv.medianRS$Raster, main="observed range size")
 #componente filogenético
-plot(bats.meanP$Raster, main="phylogenetic component")
+plot(carniv.meanP$Raster, main="phylogenetic component")
 #componente específico
-plot(bats.meanS$Raster, main= "specific component")
+plot(carniv.meanS$Raster, main= "specific component")
 
 ```
 
