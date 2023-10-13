@@ -7,11 +7,13 @@ authors = ["Fabricio Villalobos"]
   
 +++
 
-# Enfoque correlativo y escalas
+# Abordagem correlativa e escalas
 
-**Macroecología**
+**Macroecologia**
 
-Instituto de Ecología, A.C. - INECOL
+Universidade Federal do Rio Grande do Sul
+Instituto de Biociências
+PPG-Ecologia
 
 
 **NOTA**: Tienen que cargar el "workspace" (archivo .RData) del ejercicio anterior pues este tiene los objetos que usaremos en este ejercicio.
@@ -63,28 +65,28 @@ values(aet_amer1_nas) <- aet_amer1_vals
 
 Obtener las coordenadas del raster de los carnívoros
 ```{r eval=FALSE}
-bats_ras_coords <- xyFromCell(bats_raster, 1:length(values(bats_raster)))
+carniv_ras_coords <- xyFromCell(carniv_raster, 1:length(values(carniv_raster)))
 ```
 Obtener los valores de AET en los sitios en donde hay carnívoros. Cambiar NAs por 0s
 ```{r eval=FALSE}
-bats_ras_aet <- extract(aet_amer1_nas,bats_ras_coords)
-bats_ras_rich <- values(bats_raster)
-bats_ras_rich_nonas <- ifelse(is.na(bats_ras_rich),0,bats_ras_rich)
-bats_ras_aet_nonas <- ifelse(is.na(bats_ras_aet),0,bats_ras_aet)
+carniv_ras_aet <- extract(aet_amer1_nas,carniv_ras_coords)
+carniv_ras_rich <- values(carniv_raster)
+carniv_ras_rich_nonas <- ifelse(is.na(carniv_ras_rich),0,carniv_ras_rich)
+carniv_ras_aet_nonas <- ifelse(is.na(carniv_ras_aet),0,carniv_ras_aet)
 ```
 
 #Enfoque Correlativo: riqueza ~ ambiente
 Correlación entre riqueza de carnívoros y AET
 ```{r eval=FALSE}
-cor(bats_ras_aet_nonas, bats_ras_rich_nonas)
-cor.test(bats_ras_aet_nonas, bats_ras_rich_nonas)
+cor(carniv_ras_aet_nonas, carniv_ras_rich_nonas)
+cor.test(carniv_ras_aet_nonas, carniv_ras_rich_nonas)
 ```
 
 #Considerando la autocorrelación espacial
 ```{r eval=FALSE}
 library(SpatialPack)
 
-modified.ttest(bats_ras_aet_nonas, bats_ras_rich_nonas, bats_ras_coords)
+modified.ttest(carniv_ras_aet_nonas, carniv_ras_rich_nonas, carniv_ras_coords)
 
 ```
 
