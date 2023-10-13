@@ -1,0 +1,43 @@
+Macroecologia UFRGS 2023
+
+Software requerido: R (https://cran.r-project.org) e RStudio (https://www.rstudio.com)
+**Os exercicios foram testados no R version 4.3.0.
+
+Pacotes/Libreries do R:
+
+Macroecologia geral (dados):
+rgdal
+rgeos
+sp
+raster
+rasterVis
+maptools
+
+*Os pacotes acima vão ser tirados do R em outubro 2023! Sugere-se mudar (e se acostumar) pros pacotes 'sf' e 'terra' em lugar de 'rgdal', 'rgeos', 'sp' y 'raster'. Nos exercicios vamos usar todos com fins didáticos. 
+
+maps
+dismo
+rgbif
+ggmap
+ggplot2
+sf
+terra
+rnaturalearth
+alphahull
+rangeBuilder
+tidyterra
+dplyr
+
+
+
+Análise Espacial:
+letsR
+spdep
+SpatialPack
+vegan
+ecodist
+
+Análise evolutivo:
+ape
+caper
+picante
