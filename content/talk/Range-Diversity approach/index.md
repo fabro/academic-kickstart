@@ -7,11 +7,13 @@ authors = ["Fabricio Villalobos"]
   
 +++
 
-# Análisis simultáneo de distribución y diversidad (Range-Diversity)
+# Análise simultáneo de distribuição e diversidade (Range-Diversity)
 
-**Macroecología**
+**Macroecologia**
 
-Instituto de Ecología, A.C. - INECOL
+Universidade Federal do Rio Grande do Sul
+Instituto de Biociências
+PPG-Ecologia
 
 A partir de una matriz de presencia-ausencia, que representa información de riqueza y distribución, podemos demostrar la relación intrínseca entre estas dos propiedades fundamentales de la biodiversidad (Arita et al. 2008; 2012). Vamos a demostrarlo!
 
