@@ -1,5 +1,5 @@
 +++
-title = "Species geographic distributions"
+title = "Species Distributions"
 
 # Authors. Comma separated list, e.g. `["Bob Smith", "David Jones"]`.
 authors = ["Fabricio Villalobos"]
@@ -7,19 +7,21 @@ authors = ["Fabricio Villalobos"]
   
 +++
 
-# Presencias y distribuciones geográficas
+# Presenças/occorrências e distribuições geográficas
 
-**Macroecología**
+**Macroecologia**
 
-Instituto de Ecología, A.C.  - INECOL
+Universidade Federal do Rio Grande do Sul
+Instituto de Biociências
+PPG-Ecologia
 
-##### parte del código está basado en la vignette del paquete `dismo` (Hijmans & Elith 2011), código de Vijay Barve (https://vijaybarve.wordpress.com) y Luis Verde-Arregoitia (https://luisdva.github.io/)
+##### baseado em código de Vijay Barve (https://vijaybarve.wordpress.com) y Luis Verde-Arregoitia (https://luisdva.github.io/)
 
-Ya vimos de dónde vienen los datos primarios de biodiversidad (e.g. datos de presencia; almacenados en museos, colecciones científicas). Muchos de esos datos ahora están disponibles en internet!!!
+A gente já viu de onde vem os dados primários de biodiversidade (e.g. dados de ocorrência; armazenados em museus, herbaria, coleções científicas). Muitos desses dados estão agora disponíveis na internet!!!
 
-# Ejercicio 1
+# Exercicio 1
 
-Cargar los paquetes (TODOS!) necesarios para este ejercicio (estos ya deben estar instalados en su computadora)
+Instalar e CARREGAR os pacotes (TODOS!) necessarios pra esse exercicio (eles já devem ter sido baixados, seja como “.zip” ou direito desde o R) Procurem essa info no site do R: www.r-project.org. É bem simples! não tem desculpa!
 
 ```{r eval=FALSE}
 library(sf)
@@ -34,14 +36,14 @@ library(rgbif)
 library(dplyr)
 library(alphahull)
 library(rangeBuilder)
-
 ```
 
-Obtener datos de presencia de una especie cualquiera a partir de la base de datos GBIF (data.gbif.org) directamente desde R!
-**NOTA**: Necesitan estar conectados a internet. Este proceso puede tardar, dependiendo de la especie, si esta tiene (o no) muchos registros
+Obter dados de ocorrência de uma espécie qualquer a partir de base da dados GBIF (data.gbif.org) direitamente desde o software R 
+**NOTA**: tem que estar conectados à internet. Pode demorar dependendo se a espécie tem (ou não) muitos registros
+
 
 ```{r eval=FALSE}
-sp_datos <- occ_search(scientificName = "Musonycteris harrisoni", limit = 500)
+sp_datos <- occ_search(scientificName = "Chrysocyon brachyurus", limit = 1000)
 ```
 **NOTA**: Uds podrían colocar el nombre del género y la especie deseada.
 
@@ -56,7 +58,7 @@ dim(sp_data)
 ```
 Checar el nombre de las columnas (para después buscar únicamente las de posición geográfica: lat/long)
 ```{r eval=FALSE}
-names(sp_data)[1:30]
+names(sp_data)
 ```
 
 Crear otro objeto a partir del anterior para quedarse únicamente con long/lat. Quedarse únicamente con los puntos/registros individuales (i.e., excluir duplicados). Transformarlo en un objeto espacial
@@ -68,7 +70,6 @@ sp_p1<-sp_data %>%
 	distinct() %>%
 	na.omit() %>% 
 	sf::st_as_sf(coords = c('decimalLongitude','decimalLatitude'),crs="EPSG: 4326")
-
 ```
 **NOTA**: el nombre de la variable puede ser diferente (.e.g "LATITUDE", "Latidude", "lat", etc. Siempre hay que checar antes)
 
@@ -77,7 +78,6 @@ Graficar (poner en un mapa) los puntos de presencia de nuestra especie
 ggplot()+ 
 	geom_sf(data=sp_p1, col="blue",pch=19)
 ```
-
 Agregar el mapa del mundo. Para eso, necesitamos cargar el mapa (que viene con el paquete "rnaturalearth")
 ```{r eval=FALSE}
 wrld <- ne_countries(scale = "small",returnclass = "sf") 
@@ -88,13 +88,12 @@ ggplot()+
 	geom_sf(data=wrld)+geom_sf(data=sp_p1,col="blue",pch=19,size=1)+coord_sf(expand = F) +
 	labs(x="Longitud decimal ",
 	y="Latitud decimal",
-	title=expression(paste("Puntos reportados ", italic("Musonycteris harrisoni"))))+
+	title=expression(paste("Puntos reportados ", italic("Chrysocyon brachyurus"))))+
 	theme(plot.title = element_text(hjust = 0.5))
 ```
-
 ¿Hay algún dato extraño? Los puntos/registros necesitan ser "curados" (limpiados)
 
-Eliminar los puntos con mala georeferencia (en este caso, puntos obvios en el "viejo mundo")
+Eliminar los puntos con mala georeferencia (en este caso, puntos obvios en el "viejo mundo" y al norte del "nuevo mundo")
 
 ```{r eval=FALSE}
 sp_p1<-sp_data%>%
@@ -102,39 +101,31 @@ sp_p1<-sp_data%>%
   mutate(lat=decimalLatitude,lon=decimalLongitude)%>%
   distinct() %>% na.omit() %>% 
   sf::st_as_sf(coords = c('decimalLongitude','decimalLatitude'),crs="EPSG: 4326")%>%
-  filter(lat> 0.5) %>% filter(lat< 22)
+  filter(lat< 0)
 ```
-
-Ahora sí, mapeamos de nuevo pero sólamente en la región de interés (México)
+Ahora sí, mapeamos de nuevo pero sólamente en la región de interés (América del Sur)
 
 ```{r eval=FALSE}
-mex_map <- filter(wrld,name=="Mexico")
+amsur_map <- filter(wrld, name %in% c("Brazil","Argentina","Uruguay","Bolivia","Peru","Paraguay"))
 ```
 
 ```{r eval=FALSE}
-ggplot()+geom_sf(data=mex_map)+
+ggplot()+geom_sf(data=amsur_map)+
   geom_sf(data=sp_p1,col="blue",pch=19,size=1)+coord_sf(expand = F)
 ```
 
-Y ¿Cómo eliminamos los registros que están en el mar?
+Y ¿Cómo eliminamos los registros que están en el mar? Mejor me quedo sólo con los registros en Brasil
 
 ```{r eval=FALSE}
-sp_p1<-sp_data%>%
-  select(decimalLongitude,decimalLatitude,species)%>%
-  mutate(lat=decimalLatitude,lon=decimalLongitude)%>%
-  distinct() %>%
-  na.omit() %>% 
-  sf::st_as_sf(coords = c('decimalLongitude','decimalLatitude'),crs="EPSG: 4326")%>%
-  filter(lat> 0.5) %>%
-  filter(lat< 22)%>%
-  filter(lon> -105.56611)
+sp_p1 <- st_filter(sp_p1, amsur_map)
 ```
 
 
-# Ejercicio 2
+# Exercicio 2
 
 ## Range maps from point data
 En esta parte, se usaran funciones para generar mapas "simples" basados en la geometría (e.g. distancias/ángulos entre puntos, etc.). NO consideran variables ambientales!
+
 
 ## Convex hull (minimum convex polygon)
 Este modelo crea un polígono convexo alrededor de los puntos de presencia.
@@ -146,7 +137,7 @@ sp1_mcp <- st_convex_hull(st_union(sp_p1))
 
 ```{r eval=FALSE}
 ggplot()+
-  geom_sf(data=mex_map)+
+  geom_sf(data=amsur_map)+
   geom_sf(data=sp1_mcp,
           fill="blue")
 ```		  
@@ -160,24 +151,7 @@ NOTA: Esta función solo acepta tablas como entrada
 ```{r eval=FALSE}
 sp_p2<-as.data.frame(st_coordinates(sp_p1))
 
-sp1_alphahull <- ahull(sp_p2, alpha = 6)
-```
-*Error: shull: duplicate points found*
-
-Falla porque encuentra puntos duplicados o, como en este caso, puntos en una línea recta (i.e, mismo X y/o mismo Y).
-
-¿Cómo podemos identificar y solucionar este error?
-
-```{r eval=FALSE}
-sp_p3<-sp_p2 %>% select(X, Y)%>% 
-mutate(X = ifelse(duplicated(sp_p2$X), X + rnorm(1, mean = 0, sd = 0.0001), X))%>% 
-mutate(Y = ifelse(duplicated(sp_p2$Y), Y + rnorm(1, mean = 0, sd = 0.0001), Y))
-```
-
-Ahora si, podemos crear el Alpha Hull con un valor de alpha escogido (por la razón que crean relevante)
-
-```{r eval=FALSE}
-sp1_alphahull<- ahull(sp_p3, alpha = 6) 
+sp1_alphahull <- ahull(sp_p2, alpha = 10)
 ```
 
 Para observar el alpha hull, necesitamos que el objeto sea de tipo espacial del paquete `sf`. Para eso usaremos una función independiente, disponible en su carpeta de trabajo
@@ -191,7 +165,7 @@ sp1_alphahull.poly <- ah2sf(sp1_alphahull)
 
 ```{r eval=FALSE}
 ggplot()+
-	geom_sf(data=mex_map)+geom_sf(data=sp1_alphahull.poly,fill="blue")
+	geom_sf(data=amsur_map)+geom_sf(data=sp1_alphahull.poly,fill="blue")
 ```
 
 ## Polígono alfa dinámico
@@ -200,10 +174,10 @@ Usamos el paquete `rangeBuilder`, el cual crea un polígono alpha hull con un va
 
 ```{r eval=FALSE}
 sp_range <- getDynamicAlphaHull(
-  sp_p3, #Tabla de puntos/registros de la especie
+  sp_p2, #Tabla de puntos/registros de la especie
   coordHeaders = c("decimalLongitude", "decimalLatitude"),# x y y
-  fraction = 0.95,   # la fracción mínima de registros que debe incluir el polígono
-  partCount = 2,  # el máximo de polígonos disyuntos permitidos
+  fraction = 0.90,   # la fracción mínima de registros que debe incluir el polígono
+  partCount = 1,  # el máximo de polígonos disyuntos permitidos
   initialAlpha = 1, # Alpha inicial
   alphaIncrement = 0.5,
   alphaCap = 1000,
@@ -225,7 +199,7 @@ sp1_dynalpha <- st_make_valid(st_as_sf(sp_range[[1]]))
 ¿Cómo podemos visualizarlo?
 
 ```{r eval=FALSE}
-ggplot()+ geom_sf(data=mex_map)+ 
+ggplot()+ geom_sf(data=amsur_map)+ 
   geom_sf(data=sp1_dynalpha, fill="blue")
 
 ```
@@ -234,7 +208,7 @@ ggplot()+ geom_sf(data=mex_map)+
 
 ```{r eval=FALSE}
 ggplot()+
-  geom_sf(data=mex_map)+ geom_sf(data=sp1_mcp,fill="red",alpha=0.1) +
+  geom_sf(data=amsur_map)+ geom_sf(data=sp1_mcp,fill="red",alpha=0.1) +
   geom_sf(data=sp1_alphahull.poly,fill="yellow",alpha=0.5) +
   geom_sf(data=sp1_dynalpha, fill="blue",alpha=0.5)
 ```
@@ -248,7 +222,7 @@ st_write(sp1_dynalpha, "sp1_dyn_alphahull.shp")
 ```
 
 
-# Ejercicio 3
+# Exercicio 3
 
 Ahora, vamos a incluir datos ambientales/climáticos
 
@@ -302,7 +276,7 @@ ggplot()+
 ```
 
 
-Grafiquen algunas de esas variables para América y para México. Para eso, hay que modificar el "ext=matrix(c(XX,XX,XX,XX)))" de la función anterior, colocando las coordenadas correctas para América y para México (Por separado, o sea, un mapa para cada una)
+Grafiquen algunas de esas variables para América y para Brasil. Para eso, hay que modificar el "ext=matrix(c(XX,XX,XX,XX)))" de la función anterior, colocando las coordenadas correctas para América y para México (Por separado, o sea, un mapa para cada una)
 
 
 ##Ecological Niche Model (Bioclim)
@@ -316,37 +290,37 @@ env.variables<- stack (bio1, bio12)
 
 Establecer el "extent" de América del Sur y cortar las variables para ese extent
 ```{r eval=FALSE}
-mex.extent <- c(-117,-87,15,33)
-mex.env <- crop(env.variables,mex.extent)
+amsur.extent <- c(-110,-29,-56,14)
+amsur.env <- crop(env.variables,amsur.extent)
 ```
 
 Generar el modelo Bioclim (Ecological Niche Model: ENM)
 ```{r eval=FALSE}
 # Convertir los puntos de la especie en un objeto tipo `matrix` 
-sp1_points_mat <- as.matrix(sp_p3)
+sp1_points_mat <- as.matrix(sp_p2)
 
 # Correr el ENM (Bioclim)
-sp1_bioclim <- bioclim(mex.env, sp1_points_mat)
+sp1_bioclim <- bioclim(amsur.env, sp1_points_mat)
 plot(sp1_bioclim, a=1, b=2, p=0.85)
 
 # Generar una predicción del área adecuada ("suitable") basada en el ENM
-sp1.map<- predict (mex.env, sp1_bioclim)
+sp1.map<- predict (amsur.env, sp1_bioclim)
 
 # Plotar o resultado da predição baseada no ENM
 plot (sp1.map)
 
 # Evaluar el modelo ENM
-group <- kfold(sp_p3, 5)
-pres_train <- sp_p3[group != 1, ]
-pres_test <- sp_p3[group == 1, ]
+group <- kfold(sp_p2, 5)
+pres_train <- sp_p2[group != 1, ]
+pres_test <- sp_p2[group == 1, ]
 
-backg <- randomPoints(mex.env, n=1000, ext=mex.extent, extf = 1.25) 
+backg <- randomPoints(amsur.env, n=1000, ext=amsur.extent, extf = 1.25) 
 colnames(backg) = c('lon', 'lat')
 group <- kfold(backg, 5)
 backg_train <- backg[group != 1, ]
 backg_test <- backg[group == 1, ]
 
-e <- evaluate(pres_test, backg_test, sp1_bioclim, mex.env)
+e <- evaluate(pres_test, backg_test, sp1_bioclim, amsur.env)
 
 # Establecer un "threshold" para cortar la predicción y generar un mapa binario
 threshold <- e@t[which.max(e@TPR + e@TNR)]
