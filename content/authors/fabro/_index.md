@@ -10,7 +10,7 @@ authors:
 superuser: true
 
 # Role/position
-role: Investigador Titular B, SNI III
+role: Investigador Titular C, SNI III
 
 # Organizations/Affiliations
 organizations:
