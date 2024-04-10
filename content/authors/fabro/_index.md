@@ -10,7 +10,7 @@ authors:
 superuser: true
 
 # Role/position
-role: Investigador Titular C, SNI III
+role: Lab coordinator - Investigador Titular C, SNI III
 
 # Organizations/Affiliations
 organizations:
