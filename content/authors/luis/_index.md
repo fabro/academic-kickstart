@@ -10,7 +10,7 @@ authors:
 superuser: false
 
 # Role/position
-role: PostDoc Researcher
+role: Lab Technician - Tecnico Titular A - SNI I
 
 # Organizations/Affiliations
 organizations:
@@ -65,7 +65,7 @@ social:
 # Organizational groups that you belong to (for People widget)
 #   Set this to `[]` or comment out if you are not using People widget.
 user_groups:
-- Researchers
+- Principal Investigators
 ---
 
 I am a mammalogist and conservation scientist. I grew up in Mexico City, where I studied Biology at Universidad Nacional Autónoma de México before earning a PhD at the University of Queensland, Australia. I have held research fellowships in Switzerland and Chile, and my current focus is on the ecology and evolution of small mammals. Additionally, I enjoy teaching and applying data cleaning, analysis, and visualization in the statistical programming language R. Find more about me at https://luisdva.github.io/ 
