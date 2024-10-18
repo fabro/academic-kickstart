@@ -33,7 +33,7 @@ education:
   - course: MSc in Biological Sciences
     institution: Instituto de Ecología, A.C. 
     year: 2024
-  - course: BA in Biology
+  - course: BSc in Biology
     institution: Pontificia Universidad Javeriana Cali, Colombia
     year: 2021
 
