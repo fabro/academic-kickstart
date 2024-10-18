@@ -10,7 +10,7 @@ authors:
 superuser: false
 
 # Role/position
-role: MSc Student
+role: PhD Student
 
 # Organizations/Affiliations
 organizations:
@@ -29,8 +29,11 @@ education:
   courses:
   - course: PhD in Biological Sciences
     institution: Instituto de Ecología, A.C. 
-    year: ongoin
+    year: ongoing
   - course: MSc in Biological Sciences
+    institution: Instituto de Ecología, A.C. 
+    year: 2024
+  - course: BA in Biology
     institution: Pontificia Universidad Javeriana Cali, Colombia
     year: 2021
 
@@ -66,4 +69,4 @@ user_groups:
 - Grad Students
 ---
 
-I am a biology graduate from the Pontificia Universidad Javeriana Cali, Colombia. I wrote my undergraduate thesis on the evolutionary relationship between diet and brain size in phyllostomid bats. I am interested in the macroecology and macroevolution of small mammals, focusing on phyllostomid bats because of their extraordinary trophic diversity. In my master's degree at INECOL, I want to understand the effect of trophic innovations on variation in diversification rates in phyllostomid species.
+I am a biology graduate from Pontificia Universidad Javeriana Cali, Colombia, and I obtained my master’s degree at Instituto de Ecología (INECOL). Since the beginning of my career, I have been fascinated by the ecological and evolutionary patterns that shape the diversity of phyllostomid bats, with a special interest in their extraordinary trophic diversity. My undergraduate thesis explored the evolutionary relationship between diet and brain size in this family of bats, while my master’s research focused on how diet influences diversification rates in phyllostomid species. Currently, my doctoral research focuses on understanding the dimensions of dietary specialization and their relationship with rarity patterns in phyllostomids. I am passionate about phyllostomid bats, not only are they my favorite group, but I also believe they provide an exceptional model for understanding macroecological patterns related to diet.
