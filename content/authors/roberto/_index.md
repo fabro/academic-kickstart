@@ -25,7 +25,7 @@ interests:
 - Bioacoustics
 - Macroecology
 - Landscape Ecology
--Science outreach
+- Science outreach
 
 education:
   courses:
