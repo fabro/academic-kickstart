@@ -30,7 +30,7 @@ education:
   courses:
   - course: PhD in Ecology an Evolution
     institution: Universidade Federal de Goiás, Brasil
-    year: Ongoing
+    year: 2023
   - course: MSc in Ecology and Conservation
     institution: Universidade Federal de Uberlândia, Brasil
     year: 2019
@@ -67,7 +67,7 @@ education:
 # Organizational groups that you belong to (for People widget)
 #   Set this to `[]` or comment out if you are not using People widget.
 user_groups:
-- Grad Students
+- Alumni
 ---
 
 I am a biologist with a M.Sc. degree from Universidade Federal de Uberlândia (UFU), Brazil. Currently, I am working on a research project as a Ph.D. student at Universidade Federal de Goiás (UFG). My research focuses on the role of evolution on geographic range size, climatic niche, and dispersion ability within species of the Chiroptera order. 
