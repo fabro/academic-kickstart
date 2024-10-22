@@ -9,11 +9,9 @@ authors = ["Fabricio Villalobos"]
 
 # Modelos nulos en el ensamblaje de comunidades
 
-**Macroecologia**
+**Macroecología**
 
-Universidade Federal do Rio Grande do Sul
-Instituto de Biociências
-PPG-Ecologia
+Instituto de Ecología, A.C. - INECOL
 
 
 #### ¿Cuáles son las preguntas? 
