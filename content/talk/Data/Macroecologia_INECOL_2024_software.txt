@@ -1,0 +1,26 @@
+Previo al inicio del curso, instalar los siguientes programas (no es necesario tener las versiones más recientes, pero se recomiendan las siguientes versiones mínimas para acceder a toda la funcionalidad de los programas):
+	•	‘R’ versión >= 4.2.2 (disponible desde octubre de 2022; la versión más reciente es la 4.4.1). Obtener en https://cran.r-project.org/
+	•	‘RStudio’ versión >= 2023.02.01 (disponible desde febrero de 2022; la versión más reciente es la 2024.09.0). Descargar desde https://posit.co/download/rstudio-desktop/
+
+Los paquetes necesarios para el curso son:
+(se instalan desde el repositorio CRAN usando la función install.packages() o interactivamente desde la pestaña de paquetes de RStudio).
+
+ape
+caper
+classInt
+data.table
+dismo
+dplyr
+ggplot2
+letsR
+patchwork
+picante
+rgbif
+rnaturalearth
+sf
+stringr
+terra
+vegan
+viridis 
+
+Si tienen dificultades para instalar algún paquete o alguna de sus dependencias de sistema, pueden probar hacer la instalación mediante el paquete pak,  (e.g. install.packages(pak), luego pak::pak("el nombre del paquete a instalar").
