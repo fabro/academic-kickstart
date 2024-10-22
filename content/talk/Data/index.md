@@ -6,6 +6,6 @@ authors = ["Fabricio Villalobos"]
 
   
 +++
-<a href="R_Macroecologia_UFRGS_2023.txt">Software e pacotes do R</a>
+<a href="Macroecologia_INECOL_2024_software.txt">Software/paquetes de R</a>
 
-<a href="https://www.dropbox.com/scl/fo/1jvdl5ny07z9hblflzd6e/h?rlkey=kyl0uewy1b01vezteoqnzgwhb&dl=0">Dados para os exercicios</a>
+<a href="https://drive.google.com/drive/folders/1zVefsQwXFTzgzNlDFJM3sFMpsYXWE-TB?usp=drive_link">Datos para los ejercicios</a>
