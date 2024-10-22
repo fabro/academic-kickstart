@@ -1,5 +1,5 @@
 +++
-title = "Species richness gradients and spatial scales"
+title = "Correlative approach and scale effects"
 
 # Authors. Comma separated list, e.g. `["Bob Smith", "David Jones"]`.
 authors = ["Fabricio Villalobos"]
