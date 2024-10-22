@@ -1,6 +1,6 @@
 ---
-title: "Macroecologia - UFRGS 2023"
-subtitle: "Exercicios práticos no R"
+title: "Macroecologia - INECOL 2024"
+subtitle: "Ejercicios prácticos en R"
 
 # View.
 #   1 = List
