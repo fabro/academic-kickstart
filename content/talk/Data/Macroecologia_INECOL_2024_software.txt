@@ -5,6 +5,7 @@ Previo al inicio del curso, instalar los siguientes programas (no es necesario 
 Los paquetes necesarios para el curso son:
 (se instalan desde el repositorio CRAN usando la función install.packages() o interactivamente desde la pestaña de paquetes de RStudio).
 
+alphahull
 ape
 caper
 classInt
@@ -15,6 +16,7 @@ ggplot2
 letsR
 patchwork
 picante
+rangeBuilder
 rgbif
 rnaturalearth
 sf
