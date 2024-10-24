@@ -14,7 +14,7 @@ superuser: true
 
 # Organizations/Affiliations
 organizations:
-- name: Instituto de Ecología, A.C. - Mexico
+- name: Instituto de Ecología A.C. - INECOL, Mexico
   url: "https://www.inecol.mx/inecol/index.php/es/"
 
 # Short bio (displayed in user profile at end of posts)
