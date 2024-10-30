@@ -10,7 +10,7 @@ authors:
 superuser: false
 
 # Role/position
-role: Lab Technician - Tecnico Titular A - SNI I
+role: Assistant Researcher - Tecnico Titular A - SNI I
 
 # Organizations/Affiliations
 organizations:
