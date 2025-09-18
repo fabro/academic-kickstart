@@ -1,6 +1,6 @@
 ---
 # Display name
-name: Macroecología Evolutiva
+name: Laboratorio de Macroecología Evolutiva
 
 # Username (this should match the folder name)
 authors:
