@@ -1,7 +1,7 @@
 +++
-title = "Phylogenetic Diversity"
+title = "Diversidad Filogenética"
 
-# Authors. Comma separated list, e.g. `["Bob Smith", "David Jones"]`.
+# Authors. Comma separated list.
 authors = ["Juliana Herrera Perez"]
 
   
