@@ -1,7 +1,7 @@
 +++
-title = "Null models"
+title = "Modelos Nulos"
 
-# Authors. Comma separated list, e.g. `["Bob Smith", "David Jones"]`.
+# Authors. Comma separated list.
 authors = ["Fabricio Villalobos"]
 
   
@@ -11,7 +11,7 @@ authors = ["Fabricio Villalobos"]
 
 **Macroecología**
 
-Instituto de Ecología, A.C. - INECOL
+Universidad de Antioquia - Posgrado de Biología
 
 
 #### ¿Cuáles son las preguntas? 
