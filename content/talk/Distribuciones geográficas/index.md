@@ -1,8 +1,3 @@
----
-output:
-  pdf_document: default
-  html_document: default
----
 +++ title = "Distribuciones geográficas"
 
 # Authors. Comma separated list, e.g. `["Bob Smith", "David Jones"]`.
