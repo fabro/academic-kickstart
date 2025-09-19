@@ -7,7 +7,8 @@ headless = true  # This file represents a page section.
 active = true  # Activate this widget? true/false
 weight = 90  # Order that this section will appear.
 
-title = "Macroecologia INECOL 2024"
+title = "Macroecologia"
+suubtitle = "Universidad de Antioquia 2025"
 subtitle = "Ejercicios prácticos en R"
 
 [content]
