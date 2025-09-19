@@ -1,0 +1,51 @@
+Estimadxs,
+
+Primeramente, muchas gracias por el interés en nuestro curso. Ya deben haber recibido instrucciones por parte del posgrado acerca de los horarios y lugar donde se llevará a cabo. 
+
+Además de eso, queremos compartirles información relacionada con los requisitos de software que usaremos en los ejercicios del curso. 
+
+Previo al inicio del curso, instalar los siguientes programas (no es necesario tener las versiones más recientes, pero se recomiendan las siguientes versiones mínimas para acceder a toda la funcionalidad de los programas):
+      •     ‘R’ versión >= 4.4.0 (disponible desde abril de 2024; la versión más reciente es la 4.5.1). Obtener en https://cran.r-project.org/
+      •     ‘RStudio’ versión >= 2024.12.1 (disponible desde diciembre de 2024; la versión más reciente es la 2025.09.0). Descargar desde https://posit.co/download/rstudio-desktop/
+
+Los paquetes necesarios para el curso son:
+(se instalan desde el repositorio CRAN usando la función install.packages() o interactivamente desde la pestaña de paquetes de RStudio).
+
+
+Macroecología general (datos):
+sf
+terra
+dismo
+rgbif
+rnaturalearth
+geodata
+
+Análisis espacial:
+letsR
+spdep
+SpatialPack
+ecodist
+vegan
+
+Análisis evolutivo:
+ape
+caper
+picante
+
+Misceláneo:
+classInt
+data.table
+dplyr
+ggplot2
+patchwork
+stringr
+viridis 
+
+Si tienen dificultades para instalar algún paquete o alguna de sus dependencias de sistema, pueden probar hacer la instalación mediante el paquete pak,  (e.g. install.packages(pak), luego pak::pak("el nombre del paquete a instalar").
+
+Cualquier cosa, no duden en decirnos.
+
+Nos vemos el lunes!
+
+Saludos,
+Fabricio, Juliana, Daniel y Juan Luis
