@@ -1,5 +1,5 @@
 ---
-title: "Macroecologia - INECOL 2024"
+title: "Macroecologia - Universidad de Antioquia 2025"
 subtitle: "Ejercicios prácticos en R"
 
 # View.
