@@ -1,7 +1,7 @@
 ---
 title: "Construcion de mapas"
 author: "Daniel Valencia, Juliana Herrera, Fabricio Villalobos"
-date: "2025-09-25"
+date: "25-09-2025"
 output: html_document
 ---
 
