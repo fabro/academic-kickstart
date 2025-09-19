@@ -8,7 +8,7 @@ active = true  # Activate this widget? true/false
 weight = 90  # Order that this section will appear.
 
 title = "Macroecologia"
-suubtitle = "Universidad de Antioquia 2025"
+subtitle = "Universidad de Antioquia 2025"
 subtitle = "Ejercicios prácticos en R"
 
 [content]
