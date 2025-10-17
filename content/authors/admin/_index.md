@@ -15,7 +15,7 @@ role: Laboratorio
 # Organizations/Affiliations
 organizations:
 - name: Instituto de Ecología A.C. - INECOL, Mexico
-  url: "https://www.inecol.mx/inecol/index.php/es/"
+  url: "https://www.inecol.mx"
 
 # Short bio (displayed in user profile at end of posts)
 bio: Our research interests include biodiversity patterns in space and time.
