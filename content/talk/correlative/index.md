@@ -1,7 +1,7 @@
 +++
-title = "Enfoque correlativo y efecto de escala"
+title = "Enfoque correlativo y escalas espaciales"
 
-# Authors. Comma separated list, e.g. `["Bob Smith", "David Jones"]`.
+# Authors. Comma separated list.
 authors = ["Fabricio Villalobos"]
 
   
@@ -11,8 +11,10 @@ authors = ["Fabricio Villalobos"]
 
 **Macroecología**
 
-Universidad de Antioquia - Posgrado de Biología
+Instituto de Ecología, A.C. - INECOL
 
+
+**NOTA**: Tienen que cargar el "workspace" (archivo .RData) del ejercicio anterior pues este tiene los objetos que usaremos en este ejercicio.
 
 Cargar los siguientes paquetes:
 ```{r eval=FALSE}
@@ -25,7 +27,6 @@ library(sp)
 Cargar las variables ambientales
 ```{r eval=FALSE} 
 aet <- rast("ejercicios_datos/AET.bil")
-
 npp <- rast("ejercicios_datos/npp2.asc")
 
 #Checar que los rasters estén "proyectados"
@@ -35,17 +36,14 @@ crs(aet)
 #Si no estuvieran proyectados, sin tener una referencia geográfica, hay que definir una (la "default", coordenadas geográficas)
 
 crs(aet) <- "epsg:4326"
+
 crs(npp) <- "epsg:4326"
+
 ```
 
 Cortar los rasters de NPP e AET para el extent del raster de América del Sur (creado antes, de 1º de resolución)
 ```{r eval=FALSE}
-amer_ras <- rast()
-# Establecer el "extent" del raster para quedarnos justamente en las coordenadas de América del Sur
-ext(amer_ras) <- c(-110,-29,-56,14)
-res(amer_ras) <- 1
-
-aet_amer  <- crop(aet[[1]],ext(amer_ras))
+aet_amer  <- crop(aet,ext(amer_ras))
 npp_amer  <- crop(npp,ext(amer_ras))
 ```
 
@@ -65,30 +63,28 @@ values(aet_amer1_nas) <- aet_amer1_vals
 
 Obtener las coordenadas del raster de los carnívoros
 ```{r eval=FALSE}
-carniv.rast <- rast("carniv.rast.tif")
-
-carniv_ras_coords <- xyFromCell(carniv.rast, 1:length(values(carniv.rast)))
+bats_ras_coords <- xyFromCell(bats_rast, 1:length(values(bats_raster)))
 ```
 Obtener los valores de AET en los sitios en donde hay carnívoros. Cambiar NAs por 0s
 ```{r eval=FALSE}
-carniv_ras_aet <- extract(aet_amer1_nas,carniv_ras_coords)
-carniv_ras_rich <- values(carniv.rast)
-carniv_ras_rich[is.na(carniv_ras_rich)] <- 0
-carniv_ras_aet[is.na(carniv_ras_aet)] <- 0
+bats_ras_aet <- extract(aet_amer1_nas,bats_ras_coords)
+bats_ras_rich <- values(bats_raster)
+bats_ras_rich[is.na(bats_ras_rich)] <- 0
+bats_ras_aet[is.na(bats_ras_aet)] <- 0
 ```
 
 #Enfoque Correlativo: riqueza ~ ambiente
 Correlación entre riqueza de carnívoros y AET
 ```{r eval=FALSE}
-cor(carniv_ras_aet, carniv_ras_rich)
-cor.test(carniv_ras_aet[,1], carniv_ras_rich)
+cor(bats_ras_aet[,1], bats_ras_rich)
+cor.test(bats_ras_aet[,1], bats_ras_rich)
 ```
 
 #Considerando la autocorrelación espacial
 ```{r eval=FALSE}
 library(SpatialPack)
 
-modified.ttest(carniv_ras_aet[,1], carniv_ras_rich, carniv_ras_coords)
+modified.ttest(bats_ras_aet[,1], bats_ras_rich, bats_ras_coords)
 
 ```
 
