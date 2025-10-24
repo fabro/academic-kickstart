@@ -11,7 +11,7 @@ authors = ["Fabricio Villalobos"]
 
 **Macroecología**
 
-Universidad de Antioquia - Posgrado de Biología
+Instituto de Ecología, A.C. - INECOL
 
 
 #### ¿Cuáles son las preguntas? 
