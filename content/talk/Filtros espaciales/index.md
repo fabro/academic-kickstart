@@ -1,5 +1,5 @@
 +++
-title = "Filtros espaciales - caso Mexicano"
+title = "Filtros espaciales - caso Aves mexicanas"
 
 # Authors. Comma separated list.
 authors = ["Fabricio Villalobos"]
@@ -11,7 +11,7 @@ authors = ["Fabricio Villalobos"]
 
 **Macroecología**
 
-Universidad de Antioquia - Posgrado de Biología
+Instituto de Ecología, A.C. - INECOL
 
 Cargar los siguientes paquetes:
 ```{r eval=FALSE}
