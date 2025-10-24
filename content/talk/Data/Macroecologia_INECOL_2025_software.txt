@@ -1,0 +1,58 @@
+Estimadxs,
+
+Primeramente, muchas gracias por el interés en nuestro curso. Aqui les compartimos información relacionada con los requisitos de software que usaremos en los ejercicios del curso. 
+
+Previo al inicio del curso, instalar los siguientes programas (no es necesario tener las versiones más recientes, pero se recomiendan las siguientes versiones mínimas para acceder a toda la funcionalidad de los programas):
+
+      •     ‘R’ versión >= 4.4.0 (disponible desde abril de 2024; la versión más reciente es la 4.5.1). Obtener en https://cran.r-project.org/
+      •     ‘RStudio’ versión >= 2024.12.1 (disponible desde diciembre de 2024; la versión más reciente es la 2025.09.0). Descargar desde https://posit.co/download/rstudio-desktop/
+
+Los paquetes necesarios para el curso son:
+(se instalan desde el repositorio CRAN usando la función install.packages() o interactivamente desde la pestaña de paquetes de RStudio).
+
+
+Manejo de datos:
+sf
+terra
+dismo
+rgbif
+rnaturalearth
+geodata
+alphahull
+
+Análisis espacial:
+letsR
+spdep
+SpatialPack
+vegan
+
+Análisis evolutivo:
+ape
+caper
+picante
+phytools
+
+Misceláneo:
+classInt
+data.table
+deeptime 
+dplyr
+ggplot2
+ggtree 
+here
+patchwork
+rotl
+rphylopic
+stringr
+tidyr
+viridis
+
+Si tienen dificultades para instalar algún paquete o alguna de sus dependencias de sistema, pueden probar hacer la instalación mediante el paquete pak,  (e.g. install.packages(pak), luego pak::pak("el nombre del paquete a instalar").
+
+Los códigos para los ejercicios estarán hospedados en la página del Laboratorio de Macroecología Evolutiva del INECOL: https://maevolab.mx/, en la pestaña de cursos ('Courses'). No se preocupen, eso lo haremos durante el curso. Por ahora, lo importante es que tengan el software y paquetes instalados. 
+ 
+Cualquier cosa, no duden en decirme
+
+
+Saludos,
+Fabricio
