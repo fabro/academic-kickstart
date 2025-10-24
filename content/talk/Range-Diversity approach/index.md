@@ -1,7 +1,7 @@
 +++
-title = "Enfoque 'Range-Diversity'"
+title = "Enfoque Range-Diversity"
 
-# Authors. Comma separated list
+# Authors. Comma separated list.
 authors = ["Fabricio Villalobos"]
 
   
@@ -11,7 +11,7 @@ authors = ["Fabricio Villalobos"]
 
 **Macroecología**
 
-Universidad de Antioquia - Posgrado de Biología
+Instituto de Ecología, A.C. - INECOL
 
 A partir de una matriz de presencia-ausencia, que representa información de riqueza y distribución, podemos demostrar la relación intrínseca entre estas dos propiedades fundamentales de la biodiversidad (Arita et al. 2008; 2012). Vamos a demostrarlo!
 
