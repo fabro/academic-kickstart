@@ -1,5 +1,5 @@
 +++
-title = "Reglas Ecogeográficas"
+title = "Ecogeographic Rules"
 
 # Authors. Comma separated list.
 authors = ["Fabricio Villalobos"]
@@ -7,134 +7,134 @@ authors = ["Fabricio Villalobos"]
   
 +++
 
-# Reglas Ecogeográficas: el caso de Rapoport
+# Ecogeographic rules: the case of Rapoport
 
-**Macroecología**
+**Macroecology**
 
-Instituto de Ecología, A.C. - INECOL
+Julius-Maximilians-Universität Würzburg
 
-## Regla de Rapoport
+## Rapoport's Rule
 
-#### Obtener el atributo de interés: tamaño del área de distribución/range size (usando los datos de los carnívoros del ejercicio de las distribuciones geográficas)
+#### Get the trait of interest: geographic range size 
 
-Cargar el paquete `letsR`
+Load packages
 ```{r eval=FALSE}
 library(letsR)
 ```
 
-Cargar la matriz de presencia-ausencia observada
+Load observed PAM (from the bat data)
 ```{r eval=FALSE}
-load("ejercicios_datos/bats_PAM.Rdata")
+load("exercises_data/bats_PAM.Rdata")
 bats.pam <- m.PAM
 ```
 
-Calcular el tamaño de range de las especies
+Calculate the geographic range sizes of species
 ```{r eval=FALSE}
 bats.ranges <- lets.rangesize(bats.pam, units = "cell")
 ```
-Ahora tenemos un vector con los tamaños de range (número de celdas) de las especies
+Now we have a vector with range sizes (number of occupied grid cells) of all species
 
-### ¿Qué enfoque usamos? ¿Interespecífico vs ensamblaje?
 
 #### Interspecific approach
-El enfoque interespecífico se basa en el análisis de las especies como unidades, necesitando la caracterización de las propriedades de las especies. Además del atributo (range size), necesitamos obtener la 'ubicación' de las especies en el gradiente (latitud).
+This approach is based on the analysis of species as units of observation, then we need characterize their properties. 
+Besides the trait (range size), we need their location along the gradient (latitude).
 
-Obtener la ubicación de las especies. En este caso, el 'midpoint' de cada especie en el gradiente latitudinal
+Get the location of each species. In this case, their 'midpoint'
 ```{r eval=FALSE}
 bats.midpoints  <-lets.midpoint(bats.pam, planar = F)
 ```
 
-Listo! tenemos los datos, ahora poner a prueba la relación latitud~range size
+Done! We have the data, now test the latitude~range size relationship
 ```{r eval=FALSE}
 bats.lm <- lm(bats.ranges[,1]~abs(bats.midpoints[,3]))
 
 summary(bats.lm)
 ```
 
-Pero, ¿y la cuestión evolutiva? ¿La relación (o falta de) se mantiene?
-vamos a ponerlo a prueba!
+But, what about the evolutionary aspect?
+Let's evaluate it!
 ```{r eval=FALSE}
-#cargar los paquetes para el análisis filogenético
+#Load packages for evolutionary data/methods
 library(ape)
 library(caper)
-#cargar la filogenia de los carnívoros estudiados
-bats.tree <- read.tree("ejercicios_datos/bats_tree")
+#Load the phylogeny of bats
+bats.tree <- read.tree("exercises_data/bats_tree")
 
 bats.tree$tip.label <- gsub("_"," ",bats.tree$tip.label)
 
 #prepare the data
 bats.data  <- cbind(bats.midpoints[,c(1,3)],bats.ranges)
 colnames(bats.data) <- c("Species","MidLat","Range_size")
-#crear un objeto "comparative data" necesario para el análisis, de acuerdo con lo que exige el paquete `caper`
+#create a "comparative data" object needed for the analysis, according to the package being used
 bats.compdata <- comparative.data(bats.tree,bats.data,Species,vcv=T)
 
-#ajustar el modelo de regresión considerando la filogenia (PGLS: phylogenetic generalized least squares)
+#fit the phylogenetic regression model (PGLS: phylogenetic generalized least squares)
 bats.pgls <- pgls(Range_size~abs(MidLat),bats.compdata,lambda='ML')
 
 summary(bats.pgls)
 ```
-¿Qué tal? ¿Qué resultados obtuvieron?
+So? What results do we have?
 
 
-#### Assemblage approach
-El enfoque de ensamblajes se basa en el análisis de los sitios (celdas) como unidades, necesitando la caracterización de las propriedades de los conjuntos de especies que están presentes en esos sitios. Tenemos que calcular una métrica por ensamblaje/celda, como el promedio del valor del atributo para el conjunto de especies, además de la ubicación de la celda (latitud).
+#### Assemblage-based approach
+This approach is based in evaluating sites/assemblages (grid cells) as units of observation, then we need to characterize their properties. 
+We need to calculate a metric for each assemblage/cell, such as the mean trait value for the species set as well as the location of the cell (latitude).
 
 ```{r eval=FALSE}
-#Obtener los valores promedio por ensamblaje en cada celda
-#para eso, tenemos el paquete letsR! (shameless selfpromotion, again ;) )
+#Get the mean values per assemblage
+#for that, we have letsR! (shameless selfpromotion, again ;) )
 bats.medianRS <- lets.maplizer(bats.pam,bats.ranges[,1],rownames(bats.ranges), fun = median, ras=T)
 
-#la ubicación de cada celda/sitio ya la tenemos en la PAM (las primeras dos columnas).
-#Entonces, podemos tomar únicamente la latitud y probar la relación de la mediana del atributo (range size) y la latitud
+#the location of each cell/assemblage can be obtain directly from the PAM that we already have (the first two columns).
+#Then, we can simply take the latitude and test the desired relationship between the median trait (range size) and latitude
 bats.lmSites  <- lm(bats.medianRS$Matrix[,3]~abs(bats.medianRS$Matrix[,2]))
 
 summary(bats.lmSites)
 ```
-¿Qué tal? ¿Qué nos dice ese resultado?
+So? What results do we have?
 
-Ahora, incluimos la cuestión evolutiva basada en el enfoque PVR (Phylogenetic eigenVector Regression; Diniz-Filho et al. 1998) para estimar los componentes filogenético (P) y específico (S)
+Now, include the evolutionary aspect based on the PVR approach (Phylogenetic eigenVector Regression; Diniz-Filho et al. 1998) to estimate the phlogenetic (P) and specific (S) components
 ```{r eval=FALSE}
-#Obtener los componentes P y S, ¿pero cómo? tenemos letsR! Mentira, la función aún no fue incluida en letsR, pero va a estar próximamente. Por ahora, podemos cargar la función versión beta
-#cargar los paquetes necesarios para el resto de análisis
+#Obtain the P and S components. But, how? We have letsR! Unfortunately, no, the function is not in the package yet but you have it in your data folder
+#load additional packages
 library(picante)
 library(vegan)
-#cargar la función (el archivo .R que debe estar en su carpeta/espacio de trabajo WD)
-source("ejercicios_datos/p_s_components.R")
+#load the function ( .R file)
+source("exercises_data/p_s_components.R")
 
-#correr la función
+#run the function
 bats.pscomps <- p.s.comps(phy = bats.tree,sppnames = bats.midpoints[,1],data = bats.ranges,colnum = 1)
 
-#espacializar los componentes
-#componente P
+#spatialize the components, with letsR of course ;) 
+# P component
 bats.meanP <- lets.maplizer(bats.pam,bats.pscomps[[2]][,1],bats.midpoints[,1], fun = mean, ras=T)
-#componente S
+# S component
 bats.meanS <- lets.maplizer(bats.pam,bats.pscomps[[2]][,2],bats.midpoints[,1], fun = mean, ras=T)
 
-#modelos lineales
-#componente filogenético
+#lineal models
+# Phylogenetic component
 bats.lm.meanP <- lm(bats.meanP$Matrix[,3]~abs(bats.pam$P[,2]))
 
 summary(bats.lm.meanP)
 
-#componente específico
+# Specific component
 bats.lm.meanS <- lm(bats.meanS$Matrix[,3]~abs(bats.pam$P[,2]))
 
 summary(bats.lm.meanS)
 ```
 
-Grafiquemos los componentes!
+Lets plot the components in the map!
 ```{r eval=FALSE}
 par(mfrow=c(1,3))
-#atributo original
+#original trait
 plot(bats.medianRS$Raster, main="observed range size")
-#componente filogenético
+#phylogenetic component
 plot(bats.meanP$Raster, main="phylogenetic component")
-#componente específico
+#specific component
 plot(bats.meanS$Raster, main= "specific component")
 
 ```
 
-
-¿Y ahora? 
-¿Qué podemos concluir con esto?
-¿Los patrones se mantienen? ¿Por qué sí/no?
+and now?
+What can we conclude?
+Do the patterns are maintained? Y/N? Why?
