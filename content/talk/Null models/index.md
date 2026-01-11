@@ -1,5 +1,5 @@
 +++
-title = "Modelos Nulos"
+title = "Null Models"
 
 # Authors. Comma separated list.
 authors = ["Fabricio Villalobos"]
@@ -7,87 +7,87 @@ authors = ["Fabricio Villalobos"]
   
 +++
 
-# Modelos nulos en el ensamblaje de comunidades
+# Null models for the assembly of species assemblages
 
-**Macroecología**
+**Macroecology**
 
-Instituto de Ecología, A.C. - INECOL
-
-
-#### ¿Cuáles son las preguntas? 
-##### 1) ¿Los ensamblajes de especies observados son distintos a muestras aleatorias? "nulo nulo"
-##### 2) ¿Los ensamblajes de especies observados son distintos a muestras aleatorias más restringidas? "nulo restringido" (info biológica)
+Julius-Maximilians-Universität Würzburg
 
 
-Generar los datos
+#### What are the questions? 
+##### 1) Observed species assemblages are different from random samples of species? "full null"
+##### 2) Observed species assemblages are different from random but restricted samples of species? "contrained null" (biological information)
+
+
+Create the data
 ```{r eval=FALSE}
-#vector con el número (e identidad) de géneros presentes en la comunidad regional ("pool" de especies)
+#vector with the number and identity of genera present in the species pool
 generos <- as.vector(c("a","b","c","d","e","f"))
 
-#vector con las riquezas observadas en cada comunidad local (e.g. islas)
+#vector with observed species richness in each island 
 richness_coms <- as.vector(c(13,8,17,6,2))
 
-#vector con el número de géneros en cada comunidad local (en el mismo orden que las riquezas observadas)
+#vector with number of genera in each island (in the same order as the richness)
 genrs_coms <- as.vector(c(3,6,2,5,1))
 ```
 
-### PASO 1 de los modelos nulos: Calcular el índice de estructura de la(s) comunidad(es)
+### STEP 1 of null models: Calculate the desired index of assemblage structure
 ```{r eval=FALSE}
-# crear un vector con los valores de la razón S/G observados en cada comunidad
+# create a vector with the observed S/G ratios for each island/assemblage
 s_g_obs <- as.vector(richness_coms/genrs_coms)
-# calcular el valor promedio de la razón S/G para todas las comunidades
+# calculate the mean value of S/G ratio across all islands/assemblages
 mean_sgo <- mean(s_g_obs)
 ```
 
-### PASO 2. Crear las comunidades aleatorias
+### STEP 2. Create the null/random assemblages
 ```{r eval=FALSE}
-# una comunidad aleatoria con la riqueza de la primer comunidad observada (e.g. richness_coms[1])
+# one random assemblage with the observed richness of the first assemblage (e.g. richness_coms[1])
 c1 <- sample(generos, richness_coms[1],replace=T)
-# otra comunidad aleatoria con la riqueza de la segunda comunidad observada (e.g. richness_coms[2])
+# another random assemblage with the richness of the second assemblage (e.g. richness_coms[2])
 c2 <- sample(generos, richness_coms[2],replace=T)
-#calcular la razón S/G para la primer comunidad aleatoria
+#calculate the S/G ratio for the first random assemblage
 sg_null1 <- length(unique(c1))/genrs_coms[1]
 ```
 
-####¿y tengo que hacer eso para cad una? Qué pereza! Intentemos hacerlo más simple:
+#### and I have to do that for each one? what a hustle! Let's try something simpler:
 
-Crear objetos para salvar resultados
+Create objects to save results 
 ```{r eval=FALSE}
-# crear una matriz para "llenarla" con los datos de las comunidades aleatorias
+# create a matrix that will be filled with the data from random assemblages
 com <- matrix(0, nrow=max(richness_coms), ncol=length(richness_coms))
-# crear una matriz para "llenarla" con los datos calculados de las razones S/G de las comunidades aleatorias
+# create a matrix to save the calculated S/G ratios of the random assemblages
 sg_nulls <- matrix(0, nrow=length(richness_coms), ncol=1)
 ```
 
-### PASO 3. Calcular los índices para cada comunidad. 
+### STEP 3. Calculate the indices for each assemblage
 ```{r eval=FALSE}
-# ¿cómo guardamos esos resultados?
-# usamos los vectores creados arriba
+# how do we save the results?
+# we used the vectors created above
 
-# crear una matriz para "llenarla" con los datos de las comunidades aleatorias
+# create a matrix that will be filled with the data from random assemblages
 coms <- matrix(0, nrow=max(richness_coms), ncol=length(richness_coms))
-# crear una matriz para "llenarla" con los datos calculados de las razonez S/G de las comunidades aleatorias
+# create a matrix to save the calculated S/G ratios of the random assemblages
 sg_nulls <- matrix(0, nrow=length(richness_coms), ncol=1)
 
-# y los llenamos!
+# and we fill them up!
 
 sg_nulls[1,] <- sg_null1
 coms[1:richness_coms[1],1] <- c1
 mean(sg_nulls)
 ```
 
-####¿Y ahora? ¿una por una? NO! vamos a automatizar y ahorrar esfuerzos!!
-usamos "loops" en R para repetir todos los cálculos
+#### and now? one by one? NO! let's automate and save effort!!
+we use "loops" in R to repeat all the steps
 
 ```{r eval=FALSE}
-# crear comunidades "nulas" con muestreo aleatorio del "pool" de especies
+# create null assemblages with random sampling from the species pool
 for (i in 1:length(richness_coms)){
 	
 		coms[1:richness_coms[i],i] <- sample(generos, richness_coms[i], replace=T)
 	
 }
 
-# calcular las razones S/G para cada comunidad local nula e guardarlos
+# calculate S/G ratios for each null assemblage and save them 
 for (i in 1:ncol(coms)){
 	
 	sg_nulls[i,1]	<- richness_coms[i]/length(unique(coms[1:richness_coms[i],i]))	
@@ -95,17 +95,16 @@ for (i in 1:ncol(coms)){
 }
 ```
 
-PERO, esto genera apenas un escenario aleatorio, necesitamos muchos!!!
-Entonces, vamos a hacer una función para generar UN escenario nulo y después usar esa función dentro de otra para conseguir iterarla X (simulaciones) veces 
+BUT, this only generates ONE null scenario, we much more!!!
+Then, we can built our own functions: one to built one scenario and a second one to repeat it many times  
 
 ```{r eval=FALSE}
 null_sg <- function(generos, richness_coms){
-	# crear una matriz para "llenarla" con los dados de las comunidades aleatorias
+	# create matrices to save the results
 	coms <- matrix(0, nrow=max(richness_coms), ncol=length(richness_coms))
-	# crear una matriz para "llenarla" con  los datos calculados de las razones S/G de las comunidades aleatorias
 	sg_nulls <- matrix(0, nrow=length(richness_coms), ncol=1)
 	
-		# generar las comunidades "nulas" 
+		# create the null assemblages 
 		for (i in 1:length(richness_coms)){
 			
 				coms[1:richness_coms[i],i] <- sample(generos, richness_coms[i], replace=T)
@@ -113,7 +112,7 @@ null_sg <- function(generos, richness_coms){
 		}
 	
 	
-		# calcular las razones S/G para cada comunidad local nula y guardarlos
+		# calculate S/G ratios for each null assemblage and save them 
 		for (i in 1:ncol(coms)){
 			
 			sg_nulls[i,1]	<- richness_coms[i]/length(unique(coms[1:richness_coms[i],i]))	
@@ -124,7 +123,7 @@ null_sg <- function(generos, richness_coms){
 }
 ```
 
-Ahora, crear otra función que repita a la función anterior y graficar los resultados aleatorias vs el valor observado, pra comparar como cualquier otra prueba estadística (de dos colas, valor observados vs distribución teórica, ¿se acuerdan?)
+Now, the second function, to repeat the previous one and plot the results against the observed S/G value
 
 ```{r eval=FALSE}
 nulls_sg_sim <- function(generos, richness_coms, s_g_obs, sims){
@@ -151,16 +150,16 @@ nulls_sg_sim <- function(generos, richness_coms, s_g_obs, sims){
 }
 ```
 
-## Versión restringida (con mayor info biológica)
-Modelo nulo restricto: generar un vector con las probabilidades de cada género (manteniendo su orden), basadas en la riqueza de especies observada. 
-Esto significa que la probabilidad de muestrear un génerado dado está basada en cuántas especies tiene: más rico en especies, más probable de ser escogido
+## Constrained null model (with additional biological information)
+Constrained null model: first, create a vector with the probabilities for each genera (keeping their order), based on their own observed richness. 
+This means that the chance of sampling a particular genus depends on its richness: the richer, the higher the chance of being sampled 
 
-Generar un vector de probabilidades
+Create the vector of probabilities
 ```{r eval=FALSE}
 prob_sp <- as.vector(c(1/18,2/18,2/18,3/18,4/18,6/18))
 ```
 
-Cambiar las funciones de arriba para considerar las probabilidades de los generos
+Change the functions to consider the probabilities of each genus
 
 ```{r eval=FALSE}
 nullcons_sg <- function(generos, richness_coms, prob_sp){
@@ -207,6 +206,6 @@ nullcons_sg_sim <- function(generos, richness_coms, s_g_obs, prob_sp, sims){
 	
 }
 ```
-####**NOTA**: Tenemos los casos para cada comunidad individual y no solamente para el valor promedio de la razón S/G. Ustedes podrían explorar esos casos individuales
-### BUENA SUERTE!!
+####**NOTE**: We have the cases for each individual assemblage, not for the mean S/G. You could explore/create those cases
+### GOOD LUCK!!
 
