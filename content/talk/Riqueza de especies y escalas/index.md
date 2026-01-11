@@ -1,5 +1,5 @@
 +++
-title = "Riqueza de especies y escalas"
+title = "Species richness and spatial scales"
 
 # Authors. Comma separated list.
 authors = ["Fabricio Villalobos"]
@@ -7,25 +7,23 @@ authors = ["Fabricio Villalobos"]
   
 +++
 
-# Patrones geográficas de riqueza de especies y escalas espaciales
+# Geographic biodiversity patterns and spatial scales
 
-**Macroecología**
+**Macroecology**
 
-Instituto de Ecología, A.C.  - INECOL
+Julius-Maximilians-Universität Würzburg
 
-**NOTA**: Si no han cerrado R, seguimos con el mismo espacio de trabajo, pero si lo cerraron, tienen que cargar el "workspace" (archivo .RData) del ejercicio anterior pues tiene los objetos que vamos a usar en este ejercicio.
 
-Cargar los siguientes paquetes:
+Load the following:
 ```{r eval=FALSE}
 library(terra)
 library(rnaturalearth)
 library(sf)
 ```
 
-En este ejemplo, vamos a usar datos de murciélagos filostómidos para América (Neotrópico), que están disponibles en la red en la base de la IUCN (http://www.iucnredlist.org/technical-documents/spatial-data).
-Uds podrían usar cualquier otro grupo de los disponíbles en la IUCN o en otros sitios (en este caso, tienen que bajar los "shapefiles", que son archivos con extensión '.shp' y los asociados)
+In this example, we'll use range data for bats of tropical America that were downloaded from the IUCN website (https://www.iucnredlist.org/resources/spatial-data-download).
 ```{r eval=FALSE}
-bats <- st_read("ejercicios_datos/phyllostomidae_shapes/phylllostomidae_marcelo.shp")
+bats <- st_read("exercises_data/phyllostomidae_shapes/phylllostomidae_marcelo.shp")
 ```
 
 ```{r eval=FALSE, echo=FALSE, results='hide',message=FALSE}
@@ -38,27 +36,27 @@ dev.off()
 plot(bats["binomial"],col=rainbow(46, alpha=0.5))
 ```
 
-"Proyectar" en coordenadas geográficas -- definir la proyección de los datos/shapefiles
+"Project" in geographgic coordinates -- define the projection of the data (shapefiles)
 ```{r eval=FALSE}
 st_crs(bats) <- "+proj=longlat +datum=WGS84"
 ```
 
-Generar un raster para América
+Create a raster for the Americas
 ```{r eval=FALSE}
 amer_ras <- rast()
-# Establecer el "extent" del raster para quedarnos justamente en las coordenadas de América
+# Set the raster extent to keep just the part corresponding to the Americas
 ext(amer_ras) <- c(-150,-20,-60,40)
 ```
 
-Cambiar la resolución del raster de América del Sur para que sea de 1º long-lat.
+Change the spatial resolution to de 1º long-lat.
 ```{r eval=FALSE}
 res(amer_ras) <- 1
 ```
 
-#Raster de riqueza de especies
-Generar un raster para los datos de los carnivoros basado en el raster de América del Sur que ya tenemos, este nuevo raster será el mapa de riqueza de las especies de murciélagos de América!
+#Species richness raster
+Create a raster of species richness across the Americas
 
-**NOTA**: Hay otras formas de generar el raster de riqueza que son, en realidad, más apropiadas para hacer análisis biogeográficos/macroecológicos (Esta parte la vamos a ver más adelante)
+**NOTE**: This is just a "quick and dirty" way of doing it. There are other, more correct ways of doing so (e.g., with the letsR package)
 
 ```{r eval=FALSE}
 bats_rast <- terra::rasterize(bats, amer_ras, field="binomial",
@@ -68,85 +66,83 @@ writeRaster(bats_rast,"bats_rast.tif")
 
 ```
 
-Mapa continental, países
+Continental map, with countries
 ```{r, eval=FALSE}
 cont_map <- ne_countries(scale = "small", returnclass="sv")
 ```
 
 
-Graficar el raster de los murciélagos. 
+Plot the bat richness raster
 ```{r eval=FALSE}
 plot(bats_rast)
 plot(cont_map,add=T)
 ```
-¿Qué tal, quedó bien?
+How is it?
 
 
-#Dependencia de la escala
-Generar otro raster de América con una resolución diferente, de 2 grados long-lat
+#Scale depence
+Create another raster, now with a different resolution: 2 degrees long-lat
 ```{r eval=FALSE}
 amer_ras2 <- amer_ras
-# definir la resolución de 2 grados
+# define the new resolution
 res(amer_ras2) <- 2
 ```
 
-Generar el raster de los murciélagos para la nueva resolución (usando el nuevo raster de América en 2 grados long-lat)
+Create the richness raster for the new resolution
 ```{r eval=FALSE}
 bats_rast2 <- terra::rasterize(bats, amer_ras2, field="binomial",fun="count")
 
 writeRaster(bats_rast2,"bats_rast2.tif")
 ```
 
-Graficar el nuevo raster 
+Plot the new raster
 ```{r eval=FALSE}
 plot(bats_rast2)
 plot(cont_map,add=T)
 ```
-Y ahora, ¿Quedó bien? ¿igual que el anterior?
+and now, Is it ok? Same as the previous one?
 
-**NOTA**: Para mantener las diferentes gráficas de los mapas con diferentes resoluciones, tienen que abrir una nueva ventana de graficación en R. Vean el manual de R de cómo hacer eso. Si no, el gráfico generado va a aparecer en la misma "ventana" y van a "perder" el mapa anterior. Otra forma sería salvar (save as...) el gráfico y después abrir todos en otro programa para compararlos visualmente. De cualquier manera, más adelante veremos cómo graficarlos todos juntos.
-
-Otra resolución, ¿más gruesa? Generar un raster de América con resolución de 4 grados long-lat
+Other solution, larger one: 4 degrees long-lat
 ```{r eval=FALSE}
 amer_ras4 <- amer_ras2
 
 res(amer_ras4) <- 4
 ```
 
-Generar el raster de los murciélagos con el nuevo de América en 4 grados long-lat
+Create the raster at 4 degrees
 ```{r eval=FALSE}
 bats_rast4 <- terra::rasterize(bats, amer_ras4, field="binomial",fun="count")
 
 writeRaster(bats_rast4,"bats_rast4.tif")
 ```
 
-Graficar 
+Plot the raster
 ```{r eval=FALSE}
 plot(bats_rast4)
 plot(cont_map,add=T)
 ```
-¿El patrón cambió?
+Did the pattern change?
 
-¿Resolución más gruesa aún? Generar un nuevo raster de América a 8 grados long-lat
+Larger resolution, let's go for 8 degrees
 ```{r eval=FALSE}
 amer_ras8 <- amer_ras4
 
 res(amer_ras8) <- 8
 ```
 
-Y el raster de riqueza de los murciélagos en la nueva resolución
+and the raster at the largest resolution
 ```{r eval=FALSE}
 bats_rast8 <- terra::rasterize(bats, amer_ras8, field="binomial",fun="count")
 
 writeRaster(bats_rast8,"bats_rast8.tif")
 ```
 
-Graficar 
+Plot the raster
 ```{r eval=FALSE}
 plot(bats_rast8)
 plot(cont_map,add=T)
 ```
-Y ahora, ¿cambió? ¿En dónde están las mayores diferencias?
+and what now? did it change? Where are the major differences?
 ```{r eval=FALSE}
 par(mfrow=c(2,2))
 
@@ -165,103 +161,9 @@ plot(cont_map,add=T)
 dev.off()
 ```
 
-
-## Ahora para México!
-
-Generar un nuevo raster (vacio)
+Just to check and confirm the "good" use of these data for appropriate macroecological/biogeographical analyses, let's create a raster with an appropriate package (letsR - shameless selfpromotion!)
 ```{r eval=FALSE}
-ras_2 <- rast()
-
-#definir valores de cero para el raster
-values(ras_2) <- 0
-# definir el "extent" para que corresponda con las coordenadas de México. ¿Cuáles son?
-ext(ras_2) <- c(-130,-80,14,35)
-# definir la resolución (por ahora de 1 grado long-lat)
-res(ras_2) <- 1
+bats8 <- lets.presab(bats, resol = 8, count = T)
 ```
 
-Generar el raster de México usando el raster generado antes y "cortando"" con el mapa de México que tenemos del ejercicio anterior ("mex_map")
-```{r eval=FALSE}
-mex_map <- ne_countries(scale = 'small', country = "Mexico",returnclass = "sf")
-ras_mex <- rasterize(mex_map,ras_2)
-```
-
-Graficar el nuevo raster para México
-```{r eval=FALSE}
-plot(ras_mex)
-plot(as(mex_map,"Spatial"), add=T)
-```
-¿Quedó bien?
-
-Crear el raster de riqueza de los murciélagos de México usando el raster del país
-```{r eval=FALSE}
-bats_mexras <- rasterize(bats, ras_mex, field="binomial",fun="count")
-```
-
-Graficar el resultado. ¿Cómo está distribuída la riqueza de murciélagos en México? ¿Dónde hay más/menos especies?
-```{r eval=FALSE}
-#Gerar una "máscara" para que el raster quede justamente dentro de México
-bats_mexforma <- mask(bats_mexras, mex_map)
-
-plot(bats_mexforma)
-plot(as(mex_map,"Spatial"), add=T)
-```
-
-Ahora con una resolución más gruesa (2 grados long-lat)
-```{r eval=FALSE}
-ras_mex2 <- ras_mex
-
-res(ras_mex2) <- 2
-```
-
-Raster de riqueza de murciélagos
-```{r eval=FALSE}
-bats_mexras2 <- rasterize(bats, ras_mex2, field="binomial",fun="count")
-```
-
-Graficar
-```{r eval=FALSE}
-bats_mexforma2 <- mask(bats_mexras2, mex_map)
-
-plot(bats_mexforma2)
-plot(as(mex_map,"Spatial"), add=T)
-```
-¿Quedó bien? ¿Cambió?
-
-Resolución más gruesa aún
-```{r eval=FALSE}
-ras_mex5 <- ras_mex2
-
-res(ras_mex5) <- 5
-```
-
-Raster de riqueza de murciélagos
-```{r eval=FALSE}
-bats_mexras5 <- rasterize(bats, ras_mex5, field="binomial",fun="count")
-```
-
-Graficar
-```{r eval=FALSE}
-bats_mexforma5 <- mask(bats_mexras5, mex_map)
-
-plot(bats_mexforma5)
-plot(as(mex_map,"Spatial"), add=T)
-```
-¿Cambió? ¿Cuánto? ¿Dónde hay más diferencias?
-
-```{r eval=FALSE}
-par(mfrow=c(1,3))
-
-plot(bats_mexforma)
-plot(as(mex_map,"Spatial"), add=T)
-
-plot(bats_mexforma2)
-plot(as(mex_map,"Spatial"), add=T)
-
-plot(bats_mexforma5)
-plot(as(mex_map,"Spatial"), add=T)
-
-dev.off()
-```
-
-**NOTA:** Salven el "workspace" de R, es decir, todo lo que se hizo en este ejercicio debe quedar salvado como un archivo ".RData". Estos objetos serán usados en ejercicios posteriores. NO CIERREN R SIN HABER GUARDADO ESTE ARCHIVO!!!
+**NOTE:** Save the workspace of R, just in case we use the created objects later
