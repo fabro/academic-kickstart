@@ -1,5 +1,5 @@
 +++
-title = "Enfoque correlativo y escalas espaciales"
+title = "Correlative approach and spatial scales"
 
 # Authors. Comma separated list.
 authors = ["Fabricio Villalobos"]
@@ -7,53 +7,46 @@ authors = ["Fabricio Villalobos"]
   
 +++
 
-# Enfoque correlativo y escalas
+# Correlative approach and spatial scales
 
-**Macroecología**
+**Macroecology**
 
-Instituto de Ecología, A.C. - INECOL
+Julius-Maximilians-Universität Würzburg
 
 
-**NOTA**: Tienen que cargar el "workspace" (archivo .RData) del ejercicio anterior pues este tiene los objetos que usaremos en este ejercicio.
+**NOTE**: Load the workspace (RData file) from the previous exercise. It has the objects for this exercise
 
 Cargar los siguientes paquetes:
 ```{r eval=FALSE}
 library(terra)
-library(maptools)
-library(rgeos)
 library(sp)
 ```
 
 Cargar las variables ambientales
 ```{r eval=FALSE} 
-aet <- rast("ejercicios_datos/AET.bil")
-npp <- rast("ejercicios_datos/npp2.asc")
+aet <- rast("exercises_data/AET.bil")
 
-#Checar que los rasters estén "proyectados"
-crs(npp)
+
+#Check if they are "projected"
 crs(aet)
 
-#Si no estuvieran proyectados, sin tener una referencia geográfica, hay que definir una (la "default", coordenadas geográficas)
+#If they were not, without a geographic reference, we have to define it (the default, geographic coordinates)
 
 crs(aet) <- "epsg:4326"
 
-crs(npp) <- "epsg:4326"
-
 ```
 
-Cortar los rasters de NPP e AET para el extent del raster de América del Sur (creado antes, de 1º de resolución)
+Crop the raster of AET to the exten of our study domain (the Americas, created before at 1º resolution)
 ```{r eval=FALSE}
 aet_amer  <- crop(aet,ext(amer_ras))
-npp_amer  <- crop(npp,ext(amer_ras))
 ```
 
-Agregar los valores de NPP y AET en una resolución mayor
+Aggregate the values to a larger resolution
 ```{r eval=FALSE}
 aet_amer1  <- aggregate(aet_amer,2)
-npp_amer1  <- aggregate(npp_amer,2)
 ```
 
-Los valores de AET en los océanos es de 255, tienen que transformar para NA (este paso es sólo para AET, no para NPP)
+AET values in the ocean are 255, we need to transform them to NA
 ```{r eval=FALSE}
 aet_amer1_vals <- values(aet_amer1)
 aet_amer1_vals <- ifelse(aet_amer1_vals==255,NA,aet_amer1_vals)
@@ -61,26 +54,26 @@ aet_amer1_nas <- aet_amer1
 values(aet_amer1_nas) <- aet_amer1_vals
 ```
 
-Obtener las coordenadas del raster de los carnívoros
+Get the coordinates for the bat species richness raster
 ```{r eval=FALSE}
-bats_ras_coords <- xyFromCell(bats_rast, 1:length(values(bats_raster)))
+bats_ras_coords <- xyFromCell(bats_rast, 1:length(values(bats_rast)))
 ```
-Obtener los valores de AET en los sitios en donde hay carnívoros. Cambiar NAs por 0s
+Get the values of AET for the sites (gridcells) where we have bats. Change NAs for 0s
 ```{r eval=FALSE}
 bats_ras_aet <- extract(aet_amer1_nas,bats_ras_coords)
-bats_ras_rich <- values(bats_raster)
+bats_ras_rich <- values(bats_rast)
 bats_ras_rich[is.na(bats_ras_rich)] <- 0
 bats_ras_aet[is.na(bats_ras_aet)] <- 0
 ```
 
-#Enfoque Correlativo: riqueza ~ ambiente
-Correlación entre riqueza de carnívoros y AET
+#Correlative approach: spp richness ~ environment
+Correlation between bat species richness and AET
 ```{r eval=FALSE}
 cor(bats_ras_aet[,1], bats_ras_rich)
 cor.test(bats_ras_aet[,1], bats_ras_rich)
 ```
 
-#Considerando la autocorrelación espacial
+#Consider spatial autocorrelation
 ```{r eval=FALSE}
 library(SpatialPack)
 
@@ -88,7 +81,7 @@ modified.ttest(bats_ras_aet[,1], bats_ras_rich, bats_ras_coords)
 
 ```
 
-Repetir las correlaciones (los pasos anteriores) para los patrones en diferentes escalas que generamos en el ejercicio anterior
+Repeat the correlations for the different resolutions of our previous exercise
 
-¿Cómo se ven? 
-¿Hay diferencias entre las escalas?
+How do they look?
+Are there any differences among scales? Which ones? 
