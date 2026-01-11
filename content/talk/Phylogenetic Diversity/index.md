@@ -1,17 +1,22 @@
 +++
-title = "Diversidad Filogenética"
+title = "Phylogenetic Diversity"
 
 # Authors. Comma separated list.
-authors = ["Juliana Herrera Perez"]
+authors = ["Juliana Herrera-Perez & Fabricio Villalobos"]
 
   
 +++
 
+# Phylogenetic Diversity (PD) and Residual PD
 
-# Diversidad filogenética y rPD
+**Macroecology**
 
-La diversidad filogenética es calculada como la suma de las longitudes de rama de las especies que co-ocurren en un ensamblaje regional. Los residual obtenidos entre PD y Riqueza es un proxi para identificar eventos evolutivos importantes (especiación, extinción o dispersión) y nos ayudan a inferir como estos han constribuido alos patrones de diversidad que observamos.
+Julius-Maximilians-Universität Würzburg
 
+Phylogenetic diversity is calculated as the sum of branch lenghts of the tree that connects all species within an assemblage. 
+The residuals obtain from regressing PD and Species Richness can be used as a proxy to identify important evolutionary event (speciation, extinction and dispersal) and can help us infer how have they have contributed to the patterns we observed today
+
+Load the required packages
 ```         
 library(letsR)
 library(terra)
@@ -24,20 +29,20 @@ library(scales)
 
 ```
 
-Para este ejercicio vamos a cargar el R Data que contiene la PAM y la filogenia que incluye las especies de Carnívoros presentes en sur América. (Ya saben cómo construirla)
+For this exercise, we'll load R data with a PAM (presence-absence matrix) and a phylogeny with species from Carnivora in South America
 
 ```         
-load('Datacarn.RData')
+load('exercises_data/Datacarn.RData')
 ```
 
-Para explorar la PAM podemos plotear el raster de riqueza que contiene
+To explore the PAM, we can plot the richness raster contained in the PresenceAbsence object
 
 ```         
-pam_mamm$Richness_Raster<- terra::rast('richcarn.tif')
+pam_mamm$Richness_Raster<- terra::rast('exercises_data/richcarn.tif')
 plot (pam_mamm$Richness_Raster)
 ```
 
-Podríamos hacer algo más **elegante** usango ggplot
+We could something more **elegant** using ggplot
 
 ```         
 SR<-as.data.frame(pam_mamm$Richness_Raster,xy=TRUE,na.rm=TRUE)%>% 
@@ -49,32 +54,34 @@ mapSR<-ggplot()+geom_tile(data = SR , aes(x = x, y = y, fill = Riqueza))+
         axis.ticks.x=element_blank(),
         axis.text.y=element_blank(),
         axis.ticks.y=element_blank())
+        
+mapSR
 ```
 
-Para el cálculo de PD necesitamos una matriz de presencia ausencia.
+To calculate PD, we need the actual PAM (not the whole PresenceAbsence object), without the coordinates
 
 ```         
 pa<-pam_mamm$Presence_and_Absence_Matrix
 pas<-pa[,c(-1,-2)]
 ```
 
-Calculamos PD
+Calculate PD
 
 ```         
-#calculamos pd
+#calculation of PD
 pdmaam<-picante::pd(pas,phymmam, include.root=FALSE)
 
-#adicionamos una columna a la matriz PA
+#add a column to the PA matrix
 Pd_table<-cbind(pam_mamm$Presence_and_Absence_Matrix,pdmaam)
 
-#ordenamos la tabla
+#sort the resulting table
 sort<-Pd_table%>% na.omit()%>% as.data.frame() %>% arrange(desc(SR))
 
-#realizamos una regresion LOESS
+#conduct a LOESS regression
 model<- loess(PD ~ SR,data=sort)
 ```
 
-Y ploteamos esta relación
+Plot the relationship between PD and SR
 
 ```         
 plot(sort$SR,sort$PD, xlab="Riqueza",ylab="PD",pch=19)
@@ -83,16 +90,16 @@ pred<-predict(model)
 lines(pred, x=sort$SR, col="red")
 ```
 
-¿Qué observas? ¿Y si lo vemos en mapas?
+What do we see?
+And if we put it on a map?!
 
-Primero ploteamos PD
-
+First, we can plot PD
 ```         
 names(sort)[c(1,2)]<-c("x","y")
 rPD <- residuals(model)
 rPDtable<-cbind(sort,rPD)
 
-#Mapa PD 
+#Map of PD 
 mapPD <- ggplot() +
   geom_tile(data = rPDtable, aes(x = x, y = y, fill = PD)) +
   scale_fill_viridis_b(
@@ -110,24 +117,23 @@ mapPD <- ggplot() +
  mapPD 
 ```
 
-Ahora ploteamos los residuales
-
+Now we can plot the residuals from the PD-SR regression 
 ```         
 
 positive <- rPDtable$rPD[rPDtable$rPD >= 0]
 negative <- rPDtable$rPD[rPDtable$rPD < 0]
 
-# Crear 16 intervalos para positivos y negativos
+# Create 16 intervals for positive and negative residuals
 breaksp <- seq(min(positive), max(positive), length.out = 16)  # 16 intervalos
 breaksn <- seq(min(negative), max(negative), length.out = 16)  # 16 intervalos
 breakstotal <- c(breaksn, breaksp)
 
-# Crear paletas de colores
-colp <- viridis_pal(alpha = 1, option = "rocket", direction = -1)(20)  # Colores para positivos
-coln <- viridis_pal(alpha = 1, option = "mako", direction = 1)(20)     # Colores para negativos
-cols <- c(coln[1:16], colp[1:16])  # Combinamos las paletas
+# Create color palettes
+colp <- viridis_pal(alpha = 1, option = "rocket", direction = -1)(20)  # Colors for positives
+coln <- viridis_pal(alpha = 1, option = "mako", direction = 1)(20)     # Colors for negatives
+cols <- c(coln[1:16], colp[1:16])  # Combine the palettes
 
-# Mapeo usando ggplot
+# Map using ggplot
 maprPD <- ggplot() +
   geom_tile(data = rPDtable, aes(x = x, y = y, fill = rPD)) +
   scale_fill_gradientn(colours = cols, values = scales::rescale(breakstotal)) +
@@ -139,17 +145,17 @@ maprPD <- ggplot() +
     axis.ticks.y = element_blank()
   )
 
-#Veamos todo Junto
+#Let's combined the maps 
 mapSR + mapPD + maprPD
 ```
 
-¿Qué significan los residuales **positivos** ?¿Y los **negativos**?
+What do the **positive** residuals mean? and the **negative** residuals?
 
-Los residuales positivos muestran una mayor diversidad filogenetica de lo esperado por la riqueza. Pueden ser lugares dónde se presentó una baja diversificaccion insitu pero se dieron muchos eventos de dispersión.
+On one hand, positive residuals show higher PD than expected from SR. Sites with +rPD can be places where there was low and or "ancient" in situ diversification, but with several dispersal events.
 
-Por otro lado los residuales regativos indican coexistencia de linajes recientemente derivados o estrechamente relacionados.
+On the other hand, the negative residuals show lower PD than expected from SR. Sites with -rPD indicate coexistence of lineages that were recently derived or closely related.
 
-y si queremos ver la riqueza y la diversidad filogenetica al mismo tiempo???
+What if we want to look at SR and PD at the same time? We can use a bivariate map!
 
 ```         
 
