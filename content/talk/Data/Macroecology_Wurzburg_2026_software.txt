@@ -1,0 +1,57 @@
+Dear all, 
+
+First, thanks for the interest in the course. Here, I provide information on the required software that we’ll use for the practical exercises. 
+
+I suggest the following versions of R and Studio
+
+      •     ‘R’ versión >= 4.4.0 (available since April 2024). Available at https://cran.r-project.org/
+      •     ‘RStudio’ versión >= 2024.12.1 (available since December 2024). Download from https://posit.co/download/rstudio-desktop/
+
+The required packages will be the following:
+You can install them directly from CRAN. If you encounter any issue, like for example with the ‘letsR’ package, you can try to download and install it from the developers version. For this particular package, you can find the instructions here: https://github.com/macroecology/letsR 
+
+
+Data management:
+sf
+terra
+dismo
+rgbif
+rnaturalearth
+geodata
+alphahull
+
+Spatial analyses:
+letsR
+spdep
+SpatialPack
+vegan
+
+Evolutionary analyses:
+ape
+caper
+picante
+phytools
+
+Miscelaneous:
+classInt
+data.table
+deeptime 
+dplyr
+ggplot2
+ggtree 
+here
+patchwork
+rotl
+rphylopic
+stringr
+tidyr
+viridis
+
+The scripts/code for the exercises are available at the Evolutionary Macroecology websites: https://maevolab.mx/ 
+Under “courses”. We’ll go over this during the course, no worries
+ 
+Any thing, don’t hesitate to write an email. 
+
+
+Cheers!
+Fabricio
